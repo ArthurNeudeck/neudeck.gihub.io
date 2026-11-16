@@ -92,6 +92,49 @@ flowchart LR
 | SYS-PAD query API | new component, publishes IF-12 | DP-PANL |
 | SYS-PRT | new attribute broker of record on BO-PRT | DP-CRM |
 
+<!-- adoit-view: SB-005-BUILDING-BLOCKS -->
+
+```mermaid
+flowchart LR
+  subgraph CSP["SYS-CSP Customer Portal (new)"]
+    WEB["Web front end<br/>Broker Portal design system"]:::new
+    SES["BFF: session and login"]:::new
+    POV["BFF: policy overview"]:::new
+    QAB["BFF: quote-and-bind journey"]:::new
+    REF["BFF: broker referral"]:::new
+    PRF["BFF: customer profile"]:::new
+  end
+  subgraph PAD["SYS-PAD Policy Adapter Layer (changed)"]
+    QAPI["Query API"]:::new
+    RS["Read store<br/>policy.nonlife.v1"]:::new
+    MAP["Canonical mapper<br/>(existing)"]:::app
+  end
+  CIAM["SYS-CIAM"]:::ext
+  NOVA["SYS-NOVA"]:::ext
+  PRT["SYS-PRT"]:::ext
+  BRP["SYS-BRP"]:::ext
+  WEB --> SES
+  WEB --> POV
+  WEB --> QAB
+  WEB --> REF
+  WEB --> PRF
+  SES -->|IF-15| CIAM
+  POV -->|IF-12| QAPI
+  QAB -->|IF-13| NOVA
+  PRF -->|IF-14| PRT
+  REF -->|IF-16| BRP
+  QAPI --> RS
+  MAP --> RS
+  classDef app fill:#b5ffff,stroke:#2a7f8f,color:#000
+  classDef biz fill:#ffffb5,stroke:#a89a2b,color:#000
+  classDef tech fill:#c9e7b7,stroke:#4b7f3a,color:#000
+  classDef ext fill:#eeeeee,stroke:#888,color:#000
+  classDef temp fill:#ffffff,stroke:#888,stroke-dasharray:5 5,color:#000
+  classDef legacy fill:#dddddd,stroke:#777,color:#444
+  classDef new fill:#b5ffff,stroke:#1d6fa5,stroke-width:3px,color:#000
+```
+
+
 ## 6 Runtime
 Scenario "customer without broker buys motor insurance":
 
@@ -124,6 +167,27 @@ sequenceDiagram
 
 If the customer has a broker of record, the portal shows the quote request form and sends it via
 IF-16 to the Broker Portal instead of binding.
+
+Scenario "customer with a broker of record asks for a household quote":
+
+<!-- adoit-view: SB-005-RUNTIME-REFERRAL -->
+
+```mermaid
+sequenceDiagram
+  participant C as Customer
+  participant P as Customer Portal
+  participant R as Partner Master
+  participant B as Broker Portal
+  participant K as Broker
+  C->>P: request household quote
+  P->>R: IF-14 read customer
+  R-->>P: broker of record: Keller Insurance Brokers
+  P-->>C: "Your broker will contact you", no online bind
+  P->>B: IF-16 quote request with customer data
+  B->>K: new task in the broker's inbox
+  K-->>C: offer through the broker
+```
+
 
 ## 7 Deployment
 Customer Portal on the Aurora private cloud behind the internet-facing EIP gateway, with web

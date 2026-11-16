@@ -91,6 +91,35 @@ New System Blueprints: NovaPolicy, Policy Adapter Layer. The Migration Factory e
 | Loader | vendor migration API (IF-10) |
 | Reconciler | counts and premium sums across BEST-NL, NovaPolicy, SCHADEN-2000, INKA |
 
+<!-- adoit-view: SB-001-BUILDING-BLOCKS -->
+
+```mermaid
+flowchart LR
+  BEST["SYS-BEST BEST-NL"]:::legacy
+  subgraph MIG["SYS-MIG Migration Factory (temporary)"]
+    EXR["Extractor"]:::temp
+    CLN["Cleansing"]:::temp
+    TRF["Transformer"]:::temp
+    LDR["Loader"]:::temp
+    REC["Reconciler"]:::temp
+  end
+  NOVA["SYS-NOVA NovaPolicy"]:::new
+  CHK(["SYS-CLM, SYS-INK<br/>counts and premium sums"]):::ext
+  BEST -->|IF-09| EXR --> CLN --> TRF --> LDR
+  LDR -->|IF-10| NOVA
+  REC -.->|read| BEST
+  REC -.->|read| NOVA
+  REC -.->|read| CHK
+  classDef app fill:#b5ffff,stroke:#2a7f8f,color:#000
+  classDef biz fill:#ffffb5,stroke:#a89a2b,color:#000
+  classDef tech fill:#c9e7b7,stroke:#4b7f3a,color:#000
+  classDef ext fill:#eeeeee,stroke:#888,color:#000
+  classDef temp fill:#ffffff,stroke:#888,stroke-dasharray:5 5,color:#000
+  classDef legacy fill:#dddddd,stroke:#777,color:#444
+  classDef new fill:#b5ffff,stroke:#1d6fa5,stroke-width:3px,color:#000
+```
+
+
 ## 6 Runtime
 Cutover sequence: Friday 18:00 freeze motor in BEST-NL → extract → transform → load →
 reconcile → Sunday 12:00 go/no-go → switch LoB router in SYS-PAD → Sunday 18:00 rollback

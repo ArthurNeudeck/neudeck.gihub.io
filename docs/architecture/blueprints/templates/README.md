@@ -38,6 +38,20 @@ R = required, O = optional, - = not used
 | 12 Glossary | O | O | O | O | O | - | - |
 | 13 Roadmap and transition (extension) | R | R | R | O | O | R if part of an initiative | - |
 
+## Views per profile
+
+Every required chapter 3, 5 and 6 contains at least one view (diagram) from ADOIT. The views zoom
+one level at a time: each shows the building blocks of its own level and its direct neighbours.
+
+| Profile | Chapter 3 context | Chapter 5 building blocks | Chapter 6 runtime |
+|---|---|---|---|
+| Enterprise | enterprise and external parties | domains with their DPs and main flows | – |
+| Domain | domain and neighbouring domains | DPs with their systems; business objects | end-to-end process across DPs (optional) |
+| DP | DP with cross-DP interfaces | systems with lifecycle and internal interfaces | flows across the DP's systems (optional) |
+| System (Buy) | system with interfaces | licensed modules, configuration, Aurora's extensions | key scenarios, incl. configuration change |
+| System (Make) | system with interfaces | components (level 1), selected components (level 2) | key scenarios, incl. one error case |
+| Solution (full) | delta: new, changed, temporary | new and changed building blocks inside affected systems | scenarios the change introduces, incl. migration or cutover |
+
 ## Core rules
 
 1. **Model first.** Everything that is checked or linked is an ADOIT object: domains, DPs,

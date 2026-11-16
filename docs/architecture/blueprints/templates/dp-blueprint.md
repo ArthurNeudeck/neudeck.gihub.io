@@ -44,6 +44,9 @@ last_reviewed: YYYY-MM-DD
 |---|---|---|---|---|
 
 ## 6 Runtime (optional)
+<!-- adoit-view: DP-RUNTIME-<SCENARIO>-ID -->
+<!-- End-to-end flows across the DP's systems, e.g. routing between systems of record. Required
+     as soon as a scenario crosses more than two systems of the DP. -->
 ## 7 Deployment (optional)
 
 ## 8 Cross-cutting concepts and patterns

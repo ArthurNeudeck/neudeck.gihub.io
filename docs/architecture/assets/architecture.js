@@ -64,7 +64,10 @@
     ['tech', '#c9e7b7', '#4b7f3a', 'Technology: platform, infrastructure, environment'],
     ['legacy', '#dddddd', '#777777', 'Legacy or phase-out'],
     ['temp', '#ffffff', '#888888', 'Temporary or not yet approved (dashed border)'],
-    ['ext', '#eeeeee', '#888888', 'Neighbour outside the scope of this view']
+    ['ext', '#eeeeee', '#888888', 'Neighbour outside the scope of this view'],
+    ['own', '#b5ffff', '#7a3fb0', 'Aurora-owned extension inside a bought system (purple border)'],
+    ['cfg', '#f3fbe9', '#4b7f3a', 'Configuration owned by Aurora: products, rules, workflows'],
+    ['unused', '#f4f4f4', '#aaaaaa', 'Licensed but not used']
   ];
   var HEAT = [['red', '#f5a3a3', 'high'], ['amber', '#ffd591', 'medium'], ['green', '#b7e4b0', 'low']];
 
@@ -93,7 +96,7 @@
     } else {
       CLASSES.forEach(function (c) {
         if (new RegExp(':::' + c[0] + '\\b').test(src)) {
-          items.push(swatch(c[1], c[2], c[0] === 'temp', /^new/.test(c[0])) + ' ' + c[3]);
+          items.push(swatch(c[1], c[2], c[0] === 'temp', /^(new|own)/.test(c[0])) + ' ' + c[3]);
         }
       });
       var heat = HEAT.filter(function (h) {

@@ -173,6 +173,29 @@ flowchart LR
 BO-POL Policy (confidential, PII), BO-PRD Product definition (internal), BO-QTE Quote
 (confidential, PII), BO-PRM Premium / billing instruction (confidential, PII).
 
+## 6 Runtime
+End-to-end scenario across the digital products: a broker binds a motor policy after PL-1; claims and
+collections receive it without noticing the new policy system.
+
+<!-- adoit-view: DOM-PP-RUNTIME-NEWPOLICY -->
+
+```mermaid
+sequenceDiagram
+  participant BRK as DP-BRK Broker Portal
+  participant PANL as DP-PANL Policy Administration
+  participant INT as DP-INT Integration Platform
+  participant CLH as DP-CLH Claims Handling
+  participant COL as DP-COL Collections
+  BRK->>PANL: quote and bind (IF-06)
+  PANL-->>BRK: policy number
+  PANL->>INT: canonical policy event (IF-03)
+  Note over INT: available to every subscriber within 1 minute
+  PANL->>CLH: nightly policy feed, legacy format (IF-04)
+  PANL->>COL: nightly billing instructions, legacy format (IF-05)
+  Note over CLH,COL: next morning: claims can be reported, first premium is invoiced
+```
+
+
 ## 8 Domain patterns
 | Pattern | Problem | Solution | Applies when | Origin |
 |---|---|---|---|---|
