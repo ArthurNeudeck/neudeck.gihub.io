@@ -84,6 +84,9 @@
       if (/-->>/.test(src)) {
         items.push('<span class="ab-line">&#8674;</span> response');
       }
+      if (/^\s*alt\b/m.test(src)) {
+        items.push('<span class="ab-swatch ab-frame"></span> frame "alt": alternative paths, condition in brackets');
+      }
       if (/Note over/.test(src)) {
         items.push(swatch('#555', '#555') + ' note');
       }

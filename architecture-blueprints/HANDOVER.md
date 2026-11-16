@@ -116,6 +116,16 @@ Published content lives under `docs/architecture/` (GitHub Pages serves `docs/`)
   modelled as "planned".
 - New findings F12 (strategic fit in triage) and F13 (plateau dependencies across programmes).
 
+### Example enhancement: malware scanning at entry (decided 2026-11-16)
+- Variant B: STD-SEC-01 (owner CISO, anchored at enterprise, applies when "receives files from
+  outside") accepts provider scanning in SaaS as equivalent control if contracted and evidenced
+  (checked in STD-OUT-01 assessment). ADR-ENT-006.
+- SB-007 (full, change, plateau PL-S1) with generated compliance overview; central SYS-SCAN in
+  DP-SEC via EIP gateway (IF-17); unmodelled BEST-NL SFTP inbox found (IF-18) → exception
+  ADR-SYS-BEST-001 decided by the CISO per delegation matrix, held in DP-PANL Blueprint (F4).
+- Method section 8 now has two subsections: demand-driven and standard-driven enhancements; minimum
+  modelling depth for standards includes accepted equivalent control. New finding F14.
+
 ### Parked
 - Zug 7: tool support. Evaluate Backstage (catalog Domain/System/Component/API, TechDocs on
   MkDocs, scorecards) plus custom plugins (ADOIT sync, triage, gate) against a custom build.

@@ -16,7 +16,7 @@
     <link rel="stylesheet" type="text/css" href="../assets/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="../assets/css/font-awesome.css">
     <link rel="stylesheet" href="../assets/css/templatemo-lava.css">
-    <link rel="stylesheet" href="assets/architecture.css?v=18">
+    <link rel="stylesheet" href="assets/architecture.css?v=20">
 </head>
 
 <body>
@@ -166,7 +166,7 @@
     <tr><td>Interface</td><td>source, target, type, business objects, lifecycle</td><td>context views, detecting cross-DP changes</td></tr>
     <tr><td>Business object</td><td>data classification, PII, system of record</td><td>privacy and residency checks</td></tr>
     <tr><td>Capability</td><td>relation to systems and strategic goals, heat</td><td>heatmaps, impact of changes</td></tr>
-    <tr><td>Principle, standard</td><td>owner function, anchor level, version, applicability rule</td><td>cascade check, exception authority</td></tr>
+    <tr><td>Principle, standard</td><td>owner function, anchor level, version, applicability rule; for standards also the accepted equivalent control of providers</td><td>cascade check, exception authority, compliance overview</td></tr>
     </tbody>
 </table>
 <p>Systems carry <strong>aliases</strong> because people write "Nova" or "the new policy system"
@@ -305,6 +305,10 @@ flowchart TB
     principle. An error is overridden only by the owner of the violated rule, via ADR.</p>
 
 <h2 id="enhance">8 Enhancing the target pictures</h2>
+<p>Enhancements come in two kinds: driven by a <a href="#enhance-demand">business demand</a>, or by a
+    <a href="#enhance-standard">new standard</a>. Both use the same building blocks; they differ in
+    direction and in where the first decision is taken.</p>
+<h3 id="enhance-demand" data-toc="Enhancements driven by a demand">Enhancements driven by a demand</h3>
 <p>Target pictures are never finished. New demands arrive that the current blueprints do not cover:
     a new channel, a new product, a regulation. The method handles them with the same building blocks
     as any other change, but one rule matters more than usual: <strong>each decision is recorded at
@@ -360,6 +364,48 @@ flowchart TB
         API decided in the policy domain (ADR-DOM-002), and Solution Blueprint SB-005 for the delta.</p>
 </div>
 
+<h3 id="enhance-standard" data-toc="Enhancements driven by a standard">Enhancements driven by a new standard</h3>
+<p>Not every enhancement starts with a business demand. A new regulation or a security incident often
+    starts with a <strong>rule</strong> that every system must follow. Such an enhancement runs top-down
+    and uses the parts of the method a single demand rarely touches: the applicability rule of a standard,
+    the compliance table in chapter 2 of every System Blueprint, and the delegation matrix for exceptions.</p>
+<ol>
+    <li><strong>Define the standard as a model object</strong> with owner function, anchor level, statement
+        and an applicability rule based on system attributes (for example "receives files from outside").
+        Record the reasoning in an ADR at the anchor level.</li>
+    <li><strong>Decide how providers comply.</strong> For SaaS and outsourced systems, Aurora often cannot
+        operate the control itself. Either the standard accepts an <em>equivalent control</em> by the
+        provider, contractually agreed and evidenced, or every such system needs a waiver. Decide this before
+        publishing, not system by system afterwards.</li>
+    <li><strong>Offer a platform service</strong> that makes compliance cheap, so teams use it instead of
+        building their own.</li>
+    <li><strong>Generate the compliance overview</strong> from the model: every system the applicability rule
+        selects, how it meets the standard, and a verdict. The overview is the rollout plan; each row becomes
+        a row in chapter 2 of that system's blueprint. Expect the rollout to find objects that were never
+        modelled, and add them.</li>
+    <li><strong>Turn gaps into exceptions.</strong> The delegation matrix decides who approves each one; long or
+        sensitive gaps go to the owner of the standard.</li>
+    <li><strong>Plan a rollout plateau</strong> and a Solution Blueprint for the platform service and the gateways;
+        system-specific gaps get light Solution Blueprints or exception ADRs.</li>
+</ol>
+<table>
+    <thead><tr><th></th><th>Demand-driven (e.g. customer portal)</th><th>Standard-driven (e.g. malware scanning)</th></tr></thead>
+    <tbody>
+    <tr><td>Starts with</td><td>a business need</td><td>a rule: regulation, security, risk</td></tr>
+    <tr><td>Direction</td><td>bottom-up: demand escalates to the level it needs</td><td>top-down: standard cascades to every system it applies to</td></tr>
+    <tr><td>First decision at</td><td>enterprise only if strategy is affected</td><td>the anchor level of the standard, by its owner</td></tr>
+    <tr><td>Scope found by</td><td>triage of the demand</td><td>applicability rule evaluated on the model</td></tr>
+    <tr><td>Typical result</td><td>new systems and interfaces</td><td>compliance rows, a platform service, exceptions</td></tr>
+    </tbody>
+</table>
+<div class="ab-callout ab-example">
+    <div class="ab-callout-title">Worked example</div>
+    <p>Aurora requires <a href="example.html#enhancement-scan">malware scanning at the first point of entry</a>:
+        standard STD-SEC-01 with provider scanning accepted as equivalent (ADR-ENT-006), a central scanning
+        service, a compliance overview in SB-007, and an exception for an entry point into BEST-NL that the
+        rollout discovered (ADR-SYS-BEST-001), decided by the CISO under the delegation matrix.</p>
+</div>
+
 <h2 id="roles">9 Roles and ownership</h2>
 <table>
     <thead><tr><th>Role</th><th>Accountable for</th></tr></thead>
@@ -401,10 +447,10 @@ flowchart TB
 <script src="../assets/js/custom.js"></script>
 <!-- Architecture pages -->
 <script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
-<script src="assets/docs.js?v=18"></script>
-<script src="assets/glossary.js?v=18"></script>
-<script src="assets/ids.js?v=18"></script>
-<script src="assets/architecture.js?v=18"></script>
+<script src="assets/docs.js?v=20"></script>
+<script src="assets/glossary.js?v=20"></script>
+<script src="assets/ids.js?v=20"></script>
+<script src="assets/architecture.js?v=20"></script>
 
 </body>
 </html>

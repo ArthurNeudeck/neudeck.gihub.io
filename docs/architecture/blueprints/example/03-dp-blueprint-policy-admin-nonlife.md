@@ -7,7 +7,7 @@ parent_adoit_id: DOM-PP
 domain: DOM-PP
 digital_product: DP-PANL
 status: approved
-version: 1.5
+version: 1.6
 accountable: "A. Meier (DP Manager Business) / T. Brunner (DP Manager IT)"
 responsible: "lead engineer PANL"
 reviewer: "L. Weber, solution architect DP-PANL"
@@ -41,6 +41,7 @@ CAP-01 (non-life), CAP-02 (non-life), CAP-03 (non-life).
 | DPP-01, DPP-02 | domain principles | Domain DOM-PP |
 | ADR-ENT-001, ADR-ENT-002 | decisions binding this DP | Enterprise |
 | ADR-DOM-001 | canonical policy format | Domain |
+| STD-SEC-01 | malware scanning at the first point of entry (new, owner CISO) | Enterprise |
 
 ## 3 Context
 <!-- adoit-view: DP-PANL-CONTEXT -->
@@ -59,6 +60,7 @@ flowchart LR
   PAD -->|IF-04| CLM["SCHADEN-2000 DP-CLH"]:::ext
   PAD -->|IF-05| INK["INKA DP-COL"]:::ext
   NOVA -->|IF-08| SIEM["SIEM DP-SEC"]:::tech
+  BRK(["Brokers (external)"]):::ext -.->|"IF-18 SFTP inbox, until PL-3"| BEST
   classDef app fill:#b5ffff,stroke:#2a7f8f,color:#000
   classDef biz fill:#ffffb5,stroke:#a89a2b,color:#000
   classDef tech fill:#c9e7b7,stroke:#4b7f3a,color:#000
@@ -125,6 +127,7 @@ flowchart LR
 |---|---|---|---|---|
 | ADR-DP-001 | Replace BEST-NL with NovaPolicy | decision | accepted | 2026-02-10 |
 | ADR-DP-002 | Migration by line of business, motor first | decision | accepted | 2026-02-10 |
+| ADR-SYS-BEST-001 | Broker document inbox of BEST-NL without malware scanning until decommissioning (system level, held here because BEST-NL has no System Blueprint) | exception | accepted | 2026-11-16 |
 
 ## 10 Quality requirements
 | Scenario | Target |
@@ -139,6 +142,7 @@ flowchart LR
 | EXC-ENT-002 | exception | dual system of record during migration | T. Brunner | Q2 2029 | TD-PANL-001 |
 | TD-PANL-002 | technical debt | legacy-format feeds IF-04, IF-05 generated from NovaPolicy | T. Brunner | claims / collections modernisation | TD-PANL-002 |
 | EXC-PANL-001 | exception | SIEM logging daily (ADR-SYS-NOVA-002) | T. Brunner | 2028-06-30 | TD-PANL-004 |
+| EXC-PANL-002 | exception | BEST-NL broker inbox IF-18 without scanning at entry; nightly scan as compensating control (ADR-SYS-BEST-001) | T. Brunner | 2029-06-30 | TD-PANL-005 |
 | R-PANL-01 | risk | data quality of BEST-NL motor policies (about 4 % with incomplete vehicle data) | A. Meier | before PL-1 | – |
 
 ## 13 Roadmap and transition
