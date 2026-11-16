@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Step-by-step tutorial for architects: introduce architecture blueprints on every level of an organisation, from the first sponsor conversation to living target pictures.">
+    <meta name="author" content="Arthur Neudeck">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap"
+          rel="stylesheet">
+
+    <title>Tutorial | Architecture Blueprints</title>
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" type="text/css" href="../assets/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../assets/css/font-awesome.css">
+    <link rel="stylesheet" href="../assets/css/templatemo-lava.css">
+    <link rel="stylesheet" href="assets/architecture.css?v=18">
+</head>
+
+<body>
+
+<!-- ***** Preloader Start ***** -->
+<div id="preloader">
+    <div class="jumper">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+</div>
+<!-- ***** Preloader End ***** -->
+
+<!-- ***** Header Area Start ***** -->
+<header class="header-area header-sticky">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav class="main-nav">
+                    <a href="../index.html" class="logo">
+                        neudeck.ch
+                    </a>
+                    <ul class="nav">
+                        <li><a href="index.html">Overview</a></li>
+                        <li><a href="method.html">Method</a></li>
+                        <li><a href="tutorial.html" class="active">Tutorial</a></li>
+                        <li><a href="scaling.html">Scaling</a></li>
+                        <li><a href="example.html">Example</a></li>
+                        <li><a href="templates.html">Templates</a></li>
+                        <li><a href="glossary.html">Glossary</a></li>
+                    </ul>
+                    <a class='menu-trigger'>
+                        <span>Menu</span>
+                    </a>
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- ***** Header Area End ***** -->
+
+<!-- ***** Welcome Area Start ***** -->
+<div class="welcome-area ab-hero" id="welcome">
+    <div class="header-text">
+        <div class="container">
+            <div class="row">
+                <div class="left-text col-lg-10 col-md-12">
+                    <h1>Tutorial: setting up <em>target pictures</em></h1>
+                    <p class="lead">Eleven steps from the first sponsor conversation to a living set of blueprints. Each step says what to do, what you get, when you are done, and where to find it in the Aurora example.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ***** Welcome Area End ***** -->
+
+<section class="ab-page">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3">
+                <nav class="ab-toc" id="ab-toc"></nav>
+            </div>
+            <div class="col-lg-9">
+                <article class="ab-content">
+<h2 id="before">Before you start</h2>
+<p>This tutorial assumes you know the <a href="method.html">method</a> in outline. It is written for the
+    architect who introduces it: a chief architect, the head of an enterprise architecture team, or in a
+    small company the one architect who covers everything.</p>
+
+<h3 id="slice" data-toc="Start with a vertical slice">Start with a vertical slice, not with completeness</h3>
+<p>The most common failure is to start top-down and try to finish every Enterprise and Domain Blueprint
+    before the first system is touched. The documents are outdated before anyone uses them. Instead, pick
+    <strong>one real change</strong> that matters to the business and build a vertical slice through all
+    levels it touches:</p>
+<ul>
+    <li>a lean Enterprise Blueprint (goals, capability heatmap, five to eight principles, domain map),</li>
+    <li>the one Domain Blueprint the change lives in,</li>
+    <li>the DP Blueprint and the System Blueprints of the affected systems,</li>
+    <li>the Solution Blueprint for the change itself.</li>
+</ul>
+<p>Aurora did exactly this: the replacement of the non-life policy system drove the first version of
+    every level. Other domains and DPs follow when their next significant change comes up.</p>
+
+<div class="ab-callout ab-tip">
+    <div class="ab-callout-title">How the steps are organised</div>
+    <p>Each step has a goal, the people involved, the actions, the outcome and a "done when" criterion.
+        Notes for <span class="ab-badge">small</span> and <span class="ab-badge">large</span> organisations
+        refer to the profiles on the <a href="scaling.html">scaling page</a>. Decide your profile in step 1.</p>
+</div>
+
+<h2 id="steps">The steps</h2>
+
+<div class="ab-step">
+    <h3 id="step-1" data-toc="1 Agree on purpose, sponsor and scale"><span class="ab-step-no">1</span>Agree on purpose, sponsor and scale</h3>
+    <dl class="ab-meta">
+        <dt>Goal</dt><dd>A mandate: why the organisation wants connected target pictures, who sponsors them, and how many levels are needed.</dd>
+        <dt>Who</dt><dd>Chief architect, CIO or CTO as sponsor, one or two business leaders.</dd>
+        <dt>Outcome</dt><dd>One-page mandate; chosen size profile; the change that drives the vertical slice.</dd>
+    </dl>
+    <ol>
+        <li>Collect three to five concrete pains, for example "nobody knew the claims system depends on the
+            policy feed" or "exceptions granted in 2019 are still open". They are your success measures.</li>
+        <li>Choose the size profile (small, mid-sized, large) on the <a href="scaling.html">scaling page</a>.
+            It decides which levels you introduce now.</li>
+        <li>Pick the driving change for the vertical slice: important, starting within the next months,
+            touching at least two systems.</li>
+        <li>Agree who owns the method itself (usually the chief architect) and where blueprints live (a Git
+            repository, published to an intranet or wiki).</li>
+    </ol>
+    <p><strong>Done when</strong> the sponsor has confirmed the mandate and the driving change.</p>
+</div>
+
+<div class="ab-step">
+    <h3 id="step-2" data-toc="2 Set up the repository and the minimum model"><span class="ab-step-no">2</span>Set up the repository and the minimum model</h3>
+    <dl class="ab-meta">
+        <dt>Goal</dt><dd>A model that blueprints can reference and checks can rely on.</dd>
+        <dt>Who</dt><dd>Enterprise architects, repository administrator, DP managers for their objects.</dd>
+        <dt>Outcome</dt><dd>Metamodel with ID conventions; systems, interfaces, business objects, capabilities, principles and standards of the slice modelled.</dd>
+    </dl>
+    <ol>
+        <li>Configure the ArchiMate repository with the attributes of the
+            <a href="method.html#depth">minimum modelling depth</a>: aliases, domain and DP, profile, lifecycle,
+            hosting and PII for systems; classification and system of record for business objects; owner
+            function, anchor level and applicability rule for principles and standards.</li>
+        <li>Fix ID conventions early and never reuse an ID: for example <code>SYS-</code>, <code>IF-</code>,
+            <code>BO-</code>, <code>CAP-</code>, <code>EP-</code> (enterprise principle), <code>STD-</code>,
+            <code>PL-</code> (plateau), <code>WP-</code> (work package).</li>
+        <li>Model the systems of the slice and their direct neighbours, including aliases people actually use.</li>
+        <li>Model standards as objects with an applicability rule ("applies when hosting = vendor SaaS").
+            This is what later lets the gate derive chapter 2 of a System Blueprint.</li>
+        <li>Set up the Git repository with the <a href="templates.html">template set</a> and a folder per level.</li>
+    </ol>
+    <div class="ab-callout ab-example">
+        <div class="ab-callout-title">Aurora</div>
+        <p>The <a href="viewer.html?doc=example/00-adoit-model-extract.md">model extract</a> shows the
+            minimum model as tables: 12 systems with aliases, 11 interfaces, 6 business objects with
+            classification, 8 principles and 6 standards with applicability rules.</p>
+    </div>
+    <p><span class="ab-badge">small</span> A spreadsheet or YAML files in Git can stand in for the repository at
+        first, as long as IDs are stable. <span class="ab-badge">large</span> Agree the metamodel across
+        all entities before modelling starts; import system inventories from the CMDB instead of typing them.</p>
+    <p><strong>Done when</strong> every system of the slice has a complete set of minimum attributes.</p>
+</div>
+
+<div class="ab-step">
+    <h3 id="step-3" data-toc="3 Write the Enterprise Blueprint"><span class="ab-step-no">3</span>Write the Enterprise Blueprint</h3>
+    <dl class="ab-meta">
+        <dt>Goal</dt><dd>The strategic frame every other blueprint refers to.</dd>
+        <dt>Who</dt><dd>Chief architect; reviewed by the Architecture Board and the sponsor.</dd>
+        <dt>Template</dt><dd><a href="viewer.html?doc=templates/enterprise-blueprint.md">enterprise-blueprint.md</a></dd>
+    </dl>
+    <ol>
+        <li><strong>Chapter 1:</strong> translate the business strategy into three to six measurable strategic
+            goals. Build the capability map (an industry reference model saves weeks) and colour it as a
+            heatmap: where does the strategy demand change? Link every red capability to a goal.</li>
+        <li><strong>Chapter 2:</strong> list regulatory and group constraints as model references.</li>
+        <li><strong>Chapter 4:</strong> write the architecture strategy in a few bullets (buy before make,
+            replacement approach, integration approach), then five to eight enterprise principles. Each
+            principle needs a statement, rationale and implications, and an owner. Fewer, sharper principles
+            are better: every principle will appear in every blueprint below.</li>
+        <li>List the standards in chapter 4.3, generated from the model.</li>
+        <li><strong>Chapter 5:</strong> the domain map, with a domain architect per domain (see step 4).</li>
+        <li><strong>Chapters 9, 11, 13:</strong> start empty or with the first cross-domain decisions; roadmap
+            plateaus come from step 9.</li>
+    </ol>
+    <div class="ab-callout ab-example">
+        <div class="ab-callout-title">Aurora</div>
+        <p>The <a href="viewer.html?doc=example/01-enterprise-blueprint-aurora.md">Enterprise Blueprint</a>
+            has four strategic goals, a heatmap with two red capabilities (product development and policy
+            administration), six principles and three enterprise ADRs. That is enough.</p>
+    </div>
+    <p><strong>Done when</strong> the Architecture Board has approved version 1 and each red capability is
+        linked to a goal.</p>
+</div>
+
+<div class="ab-step">
+    <h3 id="step-4" data-toc="4 Cut domains and digital products"><span class="ab-step-no">4</span>Cut domains and digital products</h3>
+    <dl class="ab-meta">
+        <dt>Goal</dt><dd>A stable structure for accountability, budgets and decisions.</dd>
+        <dt>Who</dt><dd>Chief architect with business and IT leadership; domain architects once named.</dd>
+        <dt>Outcome</dt><dd>Domain map; DP list with DP Manager Business, DP Manager IT and solution architect; every system assigned to exactly one DP.</dd>
+    </dl>
+    <ol>
+        <li>Cut domains along business capabilities, not along the org chart or along systems. Five to ten
+            domains are typical for a mid-sized company.</li>
+        <li>Put shared platforms (integration, identity, logging, archive) into a technology platform domain.
+            Using a platform through its standard offering then does not count as a cross-domain change.</li>
+        <li>Within each domain, group systems into digital products that deliver one business outcome and can
+            be planned and funded together. Name both DP managers and one solution architect per DP.</li>
+        <li>Check the rules: each DP in exactly one domain, each system in exactly one DP.</li>
+    </ol>
+    <div class="ab-callout ab-example">
+        <div class="ab-callout-title">Aurora</div>
+        <p>Five domains, eight DPs. Product &amp; Policy holds two DPs (non-life and life policy
+            administration); platforms such as integration and security services sit in Technology Platforms.</p>
+    </div>
+    <p><strong>Done when</strong> the domain map is in the Enterprise Blueprint and every system of the slice has
+        a DP.</p>
+</div>
+
+<div class="ab-step">
+    <h3 id="step-5" data-toc="5 Write the Domain Blueprint"><span class="ab-step-no">5</span>Write the Domain Blueprint</h3>
+    <dl class="ab-meta">
+        <dt>Goal</dt><dd>Translate the enterprise frame into one business area and name its reusable patterns.</dd>
+        <dt>Who</dt><dd>Domain architect; reviewed by another domain architect.</dd>
+        <dt>Template</dt><dd><a href="viewer.html?doc=templates/domain-blueprint.md">domain-blueprint.md</a></dd>
+    </dl>
+    <ol>
+        <li><strong>Chapter 2:</strong> list every enterprise principle and relevant standard and write what it
+            means for this domain. This is where the cascade becomes concrete.</li>
+        <li><strong>Chapter 4:</strong> add domain principles only where they refine an enterprise principle
+            (state which one). A domain principle that contradicts one needs a waiver.</li>
+        <li><strong>Chapter 5:</strong> the DPs of the domain with their owners, and the business objects with
+            data classification.</li>
+        <li><strong>Chapter 8:</strong> patterns. Start with candidates and mark their status; a pattern becomes
+            established when a solution is reused a second time.</li>
+    </ol>
+    <div class="ab-callout ab-example">
+        <div class="ab-callout-title">Aurora</div>
+        <p>The <a href="viewer.html?doc=example/02-domain-blueprint-product-policy.md">Product &amp; Policy
+            blueprint</a> refines EP-02 (integration platform) into DPP-02 "consumers outside the domain are
+            shielded from policy system changes", which later justifies the Policy Adapter Layer.</p>
+    </div>
+    <p><strong>Done when</strong> chapter 2 covers all enterprise principles and the gate finds no missing
+        inheritance.</p>
+</div>
+
+<div class="ab-step">
+    <h3 id="step-6" data-toc="6 Write DP and System Blueprints"><span class="ab-step-no">6</span>Write DP and System Blueprints</h3>
+    <dl class="ab-meta">
+        <dt>Goal</dt><dd>Make ownership, systems and their compliance visible where the work happens.</dd>
+        <dt>Who</dt><dd>DP managers (accountable), solution architects and lead engineers (authors).</dd>
+        <dt>Templates</dt><dd><a href="viewer.html?doc=templates/dp-blueprint.md">dp-blueprint.md</a>,
+            <a href="viewer.html?doc=templates/system-blueprint-buy.md">system-blueprint-buy.md</a>,
+            <a href="viewer.html?doc=templates/system-blueprint-make.md">system-blueprint-make.md</a></dd>
+    </dl>
+    <ol>
+        <li><strong>DP Blueprint:</strong> outcomes linked to strategic goals, ownership table (who is
+            accountable for which model objects), context with all cross-DP interfaces, the systems with
+            profile and lifecycle (target, legacy, phase-out, temporary), and the roadmap.</li>
+        <li>Choose the System Blueprint profile per system: <em>Buy</em> for standard software and SaaS,
+            <em>Make</em> for own development.</li>
+        <li><strong>Chapter 2 of each System Blueprint</strong> is a compliance table. For each principle and
+            standard that applies by the system's attributes, state why it applies and whether it is fulfilled.
+            Every <em>partly</em> or <em>no</em> needs an ADR (step 7).</li>
+        <li>Prioritise: write System Blueprints first for target systems and systems under change. Stable
+            systems can wait until their next change; they are already in the model.</li>
+    </ol>
+    <div class="ab-callout ab-example">
+        <div class="ab-callout-title">Aurora</div>
+        <p>Compare the <a href="viewer.html?doc=example/04-system-blueprint-novapolicy.md">NovaPolicy (Buy)</a>
+            and <a href="viewer.html?doc=example/05-system-blueprint-policy-adapter-layer.md">Policy Adapter Layer
+            (Make)</a> blueprints: the first documents modules, configuration and extensions, the second
+            components and runtime. NovaPolicy's chapter 2 shows a "no" for the logging standard, resolved by
+            an exception.</p>
+    </div>
+    <p><strong>Done when</strong> every system of the slice that is a target or under change has an approved
+        System Blueprint and every non-compliance has an ADR.</p>
+</div>
+
+<div class="ab-step">
+    <h3 id="step-7" data-toc="7 Set up decision rights"><span class="ab-step-no">7</span>Set up decision rights</h3>
+    <dl class="ab-meta">
+        <dt>Goal</dt><dd>Everyone knows where a decision is taken and who may grant a deviation.</dd>
+        <dt>Who</dt><dd>Architecture Board, function owners (CISO, data protection, compliance), domain architects.</dd>
+        <dt>Template</dt><dd><a href="viewer.html?doc=templates/adr-template.md">adr-template.md</a></dd>
+    </dl>
+    <ol>
+        <li>Publish the placement rule: decisions at the lowest level that covers all parties.</li>
+        <li>Assign an owner function and an anchor level to every principle and standard in the model.</li>
+        <li>Adopt the <a href="method.html#authority">default delegation matrix</a> and ask each owner whether
+            to tighten or loosen it for their objects.</li>
+        <li>Introduce the three ADR types (decision, exception, waiver) and an exception register: chapter 11 of
+            each blueprint, aggregated in the Enterprise Blueprint with expiry dates.</li>
+        <li>Agree what happens when an exception expires: it is either closed (compliance reached), renewed by the
+            same authority with a new rationale, or turned into a waiver.</li>
+    </ol>
+    <div class="ab-callout ab-example">
+        <div class="ab-callout-title">Aurora</div>
+        <p>Three decision types at enterprise level:
+            <a href="viewer.html?doc=example/adr/ADR-ENT-001.md">ADR-ENT-001</a> (decision),
+            <a href="viewer.html?doc=example/adr/ADR-ENT-002.md">ADR-ENT-002</a> (exception: two systems of record
+            during migration) and <a href="viewer.html?doc=example/adr/ADR-ENT-003.md">ADR-ENT-003</a> (waiver that
+            led to principle EP-04 version 2).</p>
+    </div>
+    <p><strong>Done when</strong> every principle and standard has an owner and the first exceptions are in the
+        register with expiry dates.</p>
+</div>
+
+<div class="ab-step">
+    <h3 id="step-8" data-toc="8 Introduce triage and Solution Blueprints"><span class="ab-step-no">8</span>Introduce triage and Solution Blueprints</h3>
+    <dl class="ab-meta">
+        <dt>Goal</dt><dd>Every change gets exactly as much architecture as it needs, and its results flow back.</dd>
+        <dt>Who</dt><dd>Solution architects, product owners, delivery teams.</dd>
+        <dt>Template</dt><dd><a href="viewer.html?doc=templates/solution-blueprint.md">solution-blueprint.md</a></dd>
+    </dl>
+    <ol>
+        <li>Add the architecture triage to the Definition of Ready. Pre-fill answers from the model: affected
+            systems, interfaces, DPs, personal data.</li>
+        <li>Map the result to the four change classes: Run, Deviation, Change, Initiative.</li>
+        <li>For a Deviation, write a <em>light</em> Solution Blueprint: goal, triage result, the constraint not
+            met, the ADR and the risk. For a Change, write a <em>full</em> one that describes only the delta.</li>
+        <li>Make the return checklist part of the Definition of Done. Nothing is archived before ADRs, blueprints
+            and the model are updated.</li>
+    </ol>
+    <div class="ab-callout ab-example">
+        <div class="ab-callout-title">Aurora</div>
+        <p><a href="viewer.html?doc=example/07-solution-blueprint-novapolicy-siem-logging.md">SB-004</a> is a
+            complete light Solution Blueprint on one page, already returned.
+            <a href="viewer.html?doc=example/06-solution-blueprint-p1-motor-migration.md">SB-001</a> is a full one
+            for the first plateau, with its return still open.</p>
+    </div>
+    <p><strong>Done when</strong> the first change has gone through triage, Solution Blueprint and return.</p>
+</div>
+
+<div class="ab-step">
+    <h3 id="step-9" data-toc="9 Plan initiatives in plateaus"><span class="ab-step-no">9</span>Plan initiatives in plateaus</h3>
+    <dl class="ab-meta">
+        <dt>Goal</dt><dd>Large programmes reach the target through stable, plannable intermediate states.</dd>
+        <dt>Who</dt><dd>Programme lead, domain and solution architects.</dd>
+        <dt>Outcome</dt><dd>Plateaus, gaps and work packages in the repository; chapter 13 of every affected blueprint.</dd>
+    </dl>
+    <ol>
+        <li>Describe the baseline (plateau 0) and the target, then the intermediate plateaus. A plateau is a state
+            you could stay in for months if the programme stopped.</li>
+        <li>For each plateau, model the gaps (what is added, changed, retired) and the work packages that close them.</li>
+        <li>Model temporary systems and interfaces (migration tools, bridges) with lifecycle "temporary" and an
+            end date, so they are retired, not forgotten.</li>
+        <li>Plan one Solution Blueprint per plateau and generate the programme view as a report from the repository.</li>
+    </ol>
+    <div class="ab-callout ab-example">
+        <div class="ab-callout-title">Aurora</div>
+        <p>Four plateaus from "all non-life on the old system" (PL-0) to "old system decommissioned" (PL-3),
+            five work packages, one Solution Blueprint per plateau. See chapter 13 of the
+            <a href="viewer.html?doc=example/03-dp-blueprint-policy-admin-nonlife.md">DP Blueprint</a>.</p>
+    </div>
+    <p><strong>Done when</strong> chapter 13 of the affected blueprints shows the same plateaus as the repository.</p>
+</div>
+
+<div class="ab-step">
+    <h3 id="step-10" data-toc="10 Automate the quality gate and publishing"><span class="ab-step-no">10</span>Automate the quality gate and publishing</h3>
+    <dl class="ab-meta">
+        <dt>Goal</dt><dd>Consistency is checked by machines, so reviews can focus on content.</dd>
+        <dt>Who</dt><dd>An architect with engineering support; platform team for the pipeline.</dd>
+        <dt>Outcome</dt><dd>A pipeline that checks every commit, blocks on errors and publishes approved blueprints with current diagrams.</dd>
+    </dl>
+    <ol>
+        <li>Start with the cheapest deterministic rules: front matter complete, required chapters present,
+            reviewer differs from responsible, referenced IDs exist in a model export.</li>
+        <li>Add cascade rules: chapter 2 contains every applicable principle and standard; every <em>partly</em>
+            or <em>no</em> has an ADR; exceptions have a future expiry and an allowed deciding level.</li>
+        <li>Add publishing: replace diagram markers with the current repository export, render Markdown and
+            publish to the intranet.</li>
+        <li>Only then add AI checks against the model export, as hints and warnings. Promote an AI finding to an
+            error only after a human confirms it.</li>
+    </ol>
+    <p><span class="ab-badge">small</span> Run the rule list as a review checklist until automation pays off.
+        <span class="ab-badge">large</span> The gate is not optional: without it, the cascade breaks within a year.</p>
+    <p><strong>Done when</strong> a pull request with a missing chapter 2 entry is blocked automatically.</p>
+</div>
+
+<div class="ab-step">
+    <h3 id="step-11" data-toc="11 Keep the blueprints alive and expand"><span class="ab-step-no">11</span>Keep the blueprints alive and expand</h3>
+    <dl class="ab-meta">
+        <dt>Goal</dt><dd>Blueprints stay true, and the method spreads to the rest of the organisation.</dd>
+        <dt>Who</dt><dd>All blueprint owners; the chief architect as method owner.</dd>
+    </dl>
+    <ol>
+        <li>Review each living blueprint at least yearly (<code>last_reviewed</code> in the front matter), and
+            whenever a Solution Blueprint returns into it.</li>
+        <li>Publish model quality figures in chapter 11 of the Enterprise Blueprint: share of systems with DP,
+            complete interfaces, classified business objects.</li>
+        <li>Run a monthly look at expiring exceptions and open waivers.</li>
+        <li>Harvest patterns: when a Solution Blueprint is reused a second time, promote the solution to a domain
+            pattern.</li>
+        <li>Expand slice by slice: the next domain joins when its next significant change starts.</li>
+        <li>Enhance: when a demand is not covered by the current target pictures, follow the
+            <a href="method.html#enhance">enhancement steps</a>, as Aurora did with its
+            <a href="example.html#enhancement">customer portal</a>.</li>
+    </ol>
+    <p><strong>Done when</strong> never. The success measures from step 1 tell you whether it works.</p>
+</div>
+
+<h2 id="checklist">Checklist for the first slice</h2>
+<table>
+    <thead><tr><th>Artefact</th><th>Minimum for version 1</th></tr></thead>
+    <tbody>
+    <tr><td>Repository</td><td>slice systems with minimum attributes, principles and standards with owner</td></tr>
+    <tr><td>Enterprise Blueprint</td><td>chapters 1, 2, 4, 5 complete; 9, 11, 13 started</td></tr>
+    <tr><td>Domain Blueprint</td><td>chapters 1&ndash;5 and 8 for the slice domain</td></tr>
+    <tr><td>DP Blueprint</td><td>ownership, context, systems, roadmap</td></tr>
+    <tr><td>System Blueprints</td><td>target systems and systems under change, with compliance table</td></tr>
+    <tr><td>ADRs</td><td>at least one per non-compliance; exceptions with expiry</td></tr>
+    <tr><td>Solution Blueprint</td><td>for the driving change, with return checklist</td></tr>
+    <tr><td>Quality gate</td><td>rule list as checklist, automation planned</td></tr>
+    </tbody>
+</table>
+
+<h2 id="pitfalls">Common pitfalls</h2>
+<ul>
+    <li><strong>Copying model content into text.</strong> System lists typed into a document are wrong within
+        weeks. Reference IDs and generate lists.</li>
+    <li><strong>Too many principles.</strong> Twenty enterprise principles produce twenty rows in every chapter 2
+        and nobody reads them. Keep five to eight.</li>
+    <li><strong>Exceptions without expiry.</strong> An exception without date is a silent waiver. The gate
+        should refuse it.</li>
+    <li><strong>Solution Blueprints that never return.</strong> If the return is not in the Definition of Done,
+        the living blueprints decay and the next change starts from wrong assumptions.</li>
+    <li><strong>A review board for everything.</strong> Most changes are Run. Let the triage and the gate handle
+        them; reserve boards for Change and Initiative.</li>
+</ul>
+
+<div class="ab-pager">
+    <a href="method.html">&larr; The method</a>
+    <a href="scaling.html">Next: Scaling &rarr;</a>
+</div>
+                </article>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- jQuery -->
+<script src="../assets/js/jquery-2.1.0.min.js"></script>
+<!-- Bootstrap -->
+<script src="../assets/js/popper.js"></script>
+<script src="../assets/js/bootstrap.min.js"></script>
+<!-- Plugins -->
+<script src="../assets/js/owl-carousel.js"></script>
+<script src="../assets/js/scrollreveal.min.js"></script>
+<script src="../assets/js/waypoints.min.js"></script>
+<script src="../assets/js/jquery.counterup.min.js"></script>
+<script src="../assets/js/imgfix.min.js"></script>
+<!-- Global Init -->
+<script src="../assets/js/custom.js"></script>
+<!-- Architecture pages -->
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+<script src="assets/docs.js?v=18"></script>
+<script src="assets/glossary.js?v=18"></script>
+<script src="assets/ids.js?v=18"></script>
+<script src="assets/architecture.js?v=18"></script>
+
+</body>
+</html>

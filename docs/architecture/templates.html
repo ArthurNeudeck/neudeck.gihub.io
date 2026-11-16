@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Markdown templates of the Architecture Blueprint method for every level, the ADR template, and downloads of the template set and the Aurora example.">
+    <meta name="author" content="Arthur Neudeck">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap"
+          rel="stylesheet">
+
+    <title>Templates | Architecture Blueprints</title>
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" type="text/css" href="../assets/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../assets/css/font-awesome.css">
+    <link rel="stylesheet" href="../assets/css/templatemo-lava.css">
+    <link rel="stylesheet" href="assets/architecture.css?v=18">
+</head>
+
+<body>
+
+<!-- ***** Preloader Start ***** -->
+<div id="preloader">
+    <div class="jumper">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+</div>
+<!-- ***** Preloader End ***** -->
+
+<!-- ***** Header Area Start ***** -->
+<header class="header-area header-sticky">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav class="main-nav">
+                    <a href="../index.html" class="logo">
+                        neudeck.ch
+                    </a>
+                    <ul class="nav">
+                        <li><a href="index.html">Overview</a></li>
+                        <li><a href="method.html">Method</a></li>
+                        <li><a href="tutorial.html">Tutorial</a></li>
+                        <li><a href="scaling.html">Scaling</a></li>
+                        <li><a href="example.html">Example</a></li>
+                        <li><a href="templates.html" class="active">Templates</a></li>
+                        <li><a href="glossary.html">Glossary</a></li>
+                    </ul>
+                    <a class='menu-trigger'>
+                        <span>Menu</span>
+                    </a>
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- ***** Header Area End ***** -->
+
+<!-- ***** Welcome Area Start ***** -->
+<div class="welcome-area ab-hero" id="welcome">
+    <div class="header-text">
+        <div class="container">
+            <div class="row">
+                <div class="left-text col-lg-10 col-md-12">
+                    <h1>Templates and <em>downloads</em></h1>
+                    <p class="lead">Eight Markdown templates cover every level, both Solution Blueprint profiles and decisions. Copy them into a Git repository and start with the levels your size profile needs.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ***** Welcome Area End ***** -->
+
+<section class="ab-page">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3">
+                <nav class="ab-toc" id="ab-toc"></nav>
+            </div>
+            <div class="col-lg-9">
+                <article class="ab-content">
+<h2 id="download">Download</h2>
+<div class="ab-cards">
+    <a class="ab-card" href="downloads/architecture-blueprint-templates.zip" download>
+        <strong><i class="fa fa-download"></i> Template set (.zip)</strong>
+        <span>All eight templates and the README with rules, chapter matrix and front matter.</span></a>
+    <a class="ab-card" href="downloads/aurora-example.zip" download>
+        <strong><i class="fa fa-download"></i> Aurora example (.zip)</strong>
+        <span>Model extract, seven blueprints, nine ADRs and the findings, as Markdown.</span></a>
+</div>
+<p>You can also read every template in the browser; guidance comments are shown as grey boxes, diagram
+    markers as red boxes.</p>
+
+<h2 id="set">The template set</h2>
+<table>
+    <thead><tr><th>Template</th><th>Level</th><th>Use when</th></tr></thead>
+    <tbody>
+    <tr><td><a href="viewer.html?doc=templates/README.md">README</a></td><td>all</td><td>first: core rules, change classes, quality gate, chapter matrix, front matter</td></tr>
+    <tr><td><a href="viewer.html?doc=templates/enterprise-blueprint.md">enterprise-blueprint.md</a></td><td>Enterprise (or Group)</td><td>strategy, capability heatmap, enterprise principles, domain map</td></tr>
+    <tr><td><a href="viewer.html?doc=templates/domain-blueprint.md">domain-blueprint.md</a></td><td>Domain (or sub-domain)</td><td>interpreting and refining principles, DPs, business objects, patterns</td></tr>
+    <tr><td><a href="viewer.html?doc=templates/dp-blueprint.md">dp-blueprint.md</a></td><td>Digital Product</td><td>ownership, context, systems with lifecycle, roadmap</td></tr>
+    <tr><td><a href="viewer.html?doc=templates/system-blueprint-buy.md">system-blueprint-buy.md</a></td><td>System</td><td>standard software and SaaS: modules, configuration, extensions</td></tr>
+    <tr><td><a href="viewer.html?doc=templates/system-blueprint-make.md">system-blueprint-make.md</a></td><td>System</td><td>own development: components, runtime, deployment</td></tr>
+    <tr><td><a href="viewer.html?doc=templates/solution-blueprint.md">solution-blueprint.md</a></td><td>Change</td><td>profile <em>light</em> for deviations, <em>full</em> for changes and plateaus</td></tr>
+    <tr><td><a href="viewer.html?doc=templates/adr-template.md">adr-template.md</a></td><td>all</td><td>decisions, exceptions and waivers</td></tr>
+    </tbody>
+</table>
+
+<h2 id="frontmatter">Front matter</h2>
+<p>Every blueprint starts with YAML front matter. It is what the quality gate reads first: which profile to
+    check against, which model object is described, who is accountable, who reviews.</p>
+<pre><code>---
+blueprint: system            # enterprise | domain | dp | system | solution
+profile: buy                 # enterprise | domain | dp | buy | make | solution-full | solution-light
+title: ""
+adoit_id: ""                 # repository ID of the described object
+parent_adoit_id: ""          # next-higher level
+domain: ""
+digital_product: ""
+status: draft                # draft | in-review | approved | archived
+version: 0.1
+accountable: ""              # e.g. DP Manager IT
+responsible: ""              # delegated author
+reviewer: ""                 # never identical to responsible
+last_reviewed: YYYY-MM-DD
+---</code></pre>
+
+<h2 id="repo">Setting up the Git repository</h2>
+<p>A layout that mirrors the levels keeps ownership obvious and lets you set code owners per folder:</p>
+<pre><code>blueprints/
+  README.md                      # copied from the template set
+  enterprise/
+    enterprise-blueprint.md
+    adr/                         # ADR-ENT-nnn.md
+  domains/
+    product-policy/
+      domain-blueprint.md
+      adr/
+  products/
+    policy-admin-nonlife/
+      dp-blueprint.md
+      adr/
+      systems/
+        novapolicy.md
+        policy-adapter-layer.md
+  solutions/
+    active/                      # Solution Blueprints in progress
+    archive/                     # returned and archived
+</code></pre>
+<ul>
+    <li><strong>ADRs live with their owning blueprint.</strong> When a Solution Blueprint returns, its ADRs move
+        to the <code>adr/</code> folder of the level that owns them.</li>
+    <li><strong>ADR IDs carry the level:</strong> <code>ADR-ENT-</code>, <code>ADR-DOM-</code>,
+        <code>ADR-DP-</code>, <code>ADR-SYS-&lt;system&gt;-</code>, <code>ADR-SOL-&lt;sb&gt;-</code>.</li>
+    <li><strong>Code owners</strong> per folder map to the accountable roles; the reviewer rule is enforced by
+        branch protection.</li>
+</ul>
+
+<h2 id="adapt">Adapting the templates</h2>
+<ul>
+    <li>Keep the chapter numbers even if you drop chapters. Readers rely on chapter 2 always being the
+        inherited constraints and chapter 11 always being risks and exceptions.</li>
+    <li>Replace <code>adoit-view</code> markers with the embedding mechanism of your repository tool.</li>
+    <li>Rename domains, roles and IDs freely; keep the front matter keys stable, because checks depend on them.</li>
+    <li>For a small company, start with the enterprise template, the System Blueprints, the ADR template and the
+        light Solution Blueprint (see <a href="scaling.html#small">scaling</a>).</li>
+</ul>
+
+<div class="ab-pager">
+    <a href="example.html">&larr; Example</a>
+    <a href="index.html">Back to the overview</a>
+</div>
+                </article>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- jQuery -->
+<script src="../assets/js/jquery-2.1.0.min.js"></script>
+<!-- Bootstrap -->
+<script src="../assets/js/popper.js"></script>
+<script src="../assets/js/bootstrap.min.js"></script>
+<!-- Plugins -->
+<script src="../assets/js/owl-carousel.js"></script>
+<script src="../assets/js/scrollreveal.min.js"></script>
+<script src="../assets/js/waypoints.min.js"></script>
+<script src="../assets/js/jquery.counterup.min.js"></script>
+<script src="../assets/js/imgfix.min.js"></script>
+<!-- Global Init -->
+<script src="../assets/js/custom.js"></script>
+<!-- Architecture pages -->
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+<script src="assets/docs.js?v=18"></script>
+<script src="assets/glossary.js?v=18"></script>
+<script src="assets/ids.js?v=18"></script>
+<script src="assets/architecture.js?v=18"></script>
+
+</body>
+</html>

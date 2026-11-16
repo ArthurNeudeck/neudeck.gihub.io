@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Abbreviations, standards, methods and terms used in the Architecture Blueprint method and the Aurora example, with short explanations and links.">
+    <meta name="author" content="Arthur Neudeck">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap"
+          rel="stylesheet">
+
+    <title>Glossary | Architecture Blueprints</title>
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" type="text/css" href="../assets/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../assets/css/font-awesome.css">
+    <link rel="stylesheet" href="../assets/css/templatemo-lava.css">
+    <link rel="stylesheet" href="assets/architecture.css?v=18">
+</head>
+
+<body data-ab-glossary>
+
+<!-- ***** Preloader Start ***** -->
+<div id="preloader">
+    <div class="jumper">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+</div>
+<!-- ***** Preloader End ***** -->
+
+<!-- ***** Header Area Start ***** -->
+<header class="header-area header-sticky">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav class="main-nav">
+                    <a href="../index.html" class="logo">
+                        neudeck.ch
+                    </a>
+                    <ul class="nav">
+                        <li><a href="index.html">Overview</a></li>
+                        <li><a href="method.html">Method</a></li>
+                        <li><a href="tutorial.html">Tutorial</a></li>
+                        <li><a href="scaling.html">Scaling</a></li>
+                        <li><a href="example.html">Example</a></li>
+                        <li><a href="templates.html">Templates</a></li>
+                        <li><a href="glossary.html" class="active">Glossary</a></li>
+                    </ul>
+                    <a class='menu-trigger'>
+                        <span>Menu</span>
+                    </a>
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- ***** Header Area End ***** -->
+
+<!-- ***** Welcome Area Start ***** -->
+<div class="welcome-area ab-hero" id="welcome">
+    <div class="header-text">
+        <div class="container">
+            <div class="row">
+                <div class="left-text col-lg-10 col-md-12">
+                    <h1><em>Glossary</em></h1>
+                    <p class="lead">Every abbreviation, standard and method used on these pages and in the example, explained in one or two sentences, with links to the original sources. On all other pages, underlined terms link here and show the explanation on hover.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ***** Welcome Area End ***** -->
+
+<section class="ab-page">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3">
+                <nav class="ab-toc" id="ab-toc"></nav>
+            </div>
+            <div class="col-lg-9">
+                <article class="ab-content">
+<h2 id="abbreviations">Abbreviations</h2>
+<table class="ab-glossary"><thead><tr><th>Abbreviation</th><th>Stands for</th><th>Explanation</th></tr></thead><tbody data-kind="abbr"></tbody></table>
+
+<h2 id="standards">Standards, methods and tools</h2>
+<p>The method combines established standards. You do not need to know them in depth to follow the tutorial,
+    but the links lead to the official sources if you want to.</p>
+<table class="ab-glossary"><thead><tr><th>Name</th><th>What it is</th><th>Role in the method</th></tr></thead><tbody data-kind="std"></tbody></table>
+
+<h2 id="terms">Terms of the method</h2>
+<table class="ab-glossary"><thead><tr><th>Term</th><th>Meaning</th></tr></thead><tbody data-kind="term"></tbody></table>
+
+<h2 id="id-prefixes">ID prefixes in the example</h2>
+<p>Every object in the Aurora example has a stable ID. The prefix tells you the object type; the
+    <a href="viewer.html?doc=example%2F00-adoit-model-extract.md">model extract</a> lists all objects.</p>
+<table class="ab-glossary"><thead><tr><th>Prefix</th><th>Object type</th></tr></thead><tbody data-kind="ids"></tbody></table>
+
+<p>The example also uses names of fictional systems and systems in German, such as BEST-NL (in-house non-life
+    policy system, "Bestandssystem Nichtleben"), SCHADEN-2000 (claims system, "Schaden" = claim) and INKA (collections
+    system, "Inkasso" = collections).</p>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  function esc(s) { return s.replace(/&/g, '&amp;').replace(/</g, '&lt;'); }
+  document.querySelectorAll('tbody[data-kind]').forEach(function (tbody) {
+    var kind = tbody.getAttribute('data-kind');
+    var html = '';
+    if (kind === 'ids') {
+      window.AB_ID_PREFIXES.forEach(function (p) {
+        html += '<tr><td><code>' + esc(p[0]) + '</code></td><td>' + esc(p[1]) + '</td></tr>';
+      });
+    } else {
+      window.AB_GLOSSARY.filter(function (e) { return e.kind === kind; })
+        .sort(function (a, b) { return a.term.toLowerCase().localeCompare(b.term.toLowerCase()); })
+        .forEach(function (e) {
+          var more = e.link ? ' <a href="' + e.link + '" target="_blank" rel="noopener">Source &#8599;</a>' : '';
+          html += '<tr id="' + window.abSlug(e.term) + '"><td>' + esc(e.term) + '</td>' +
+            (kind === 'term' ? '' : '<td>' + esc(e.full || '') + '</td>') +
+            '<td>' + esc(e.text) + more + '</td></tr>';
+        });
+    }
+    tbody.innerHTML = html;
+  });
+  if (location.hash) {
+    var target = document.getElementById(location.hash.slice(1));
+    if (target) { target.scrollIntoView(); window.scrollBy(0, -110); }
+  }
+});
+</script>
+
+<div class="ab-pager">
+    <a href="templates.html">&larr; Templates</a>
+    <a href="index.html">Back to the overview</a>
+</div>
+                </article>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- jQuery -->
+<script src="../assets/js/jquery-2.1.0.min.js"></script>
+<!-- Bootstrap -->
+<script src="../assets/js/popper.js"></script>
+<script src="../assets/js/bootstrap.min.js"></script>
+<!-- Plugins -->
+<script src="../assets/js/owl-carousel.js"></script>
+<script src="../assets/js/scrollreveal.min.js"></script>
+<script src="../assets/js/waypoints.min.js"></script>
+<script src="../assets/js/jquery.counterup.min.js"></script>
+<script src="../assets/js/imgfix.min.js"></script>
+<!-- Global Init -->
+<script src="../assets/js/custom.js"></script>
+<!-- Architecture pages -->
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+<script src="assets/docs.js?v=18"></script>
+<script src="assets/glossary.js?v=18"></script>
+<script src="assets/ids.js?v=18"></script>
+<script src="assets/architecture.js?v=18"></script>
+
+</body>
+</html>

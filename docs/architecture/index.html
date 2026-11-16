@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="A method for architecture target pictures on every level of an organisation: levels, templates, governance and an end-to-end example.">
+    <meta name="author" content="Arthur Neudeck">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap"
+          rel="stylesheet">
+
+    <title>Architecture Blueprints | neudeck.ch</title>
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" type="text/css" href="../assets/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../assets/css/font-awesome.css">
+    <link rel="stylesheet" href="../assets/css/templatemo-lava.css">
+    <link rel="stylesheet" href="assets/architecture.css?v=18">
+</head>
+
+<body>
+
+<!-- ***** Preloader Start ***** -->
+<div id="preloader">
+    <div class="jumper">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+</div>
+<!-- ***** Preloader End ***** -->
+
+<!-- ***** Header Area Start ***** -->
+<header class="header-area header-sticky">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav class="main-nav">
+                    <a href="../index.html" class="logo">
+                        neudeck.ch
+                    </a>
+                    <ul class="nav">
+                        <li><a href="index.html" class="active">Overview</a></li>
+                        <li><a href="method.html">Method</a></li>
+                        <li><a href="tutorial.html">Tutorial</a></li>
+                        <li><a href="scaling.html">Scaling</a></li>
+                        <li><a href="example.html">Example</a></li>
+                        <li><a href="templates.html">Templates</a></li>
+                        <li><a href="glossary.html">Glossary</a></li>
+                    </ul>
+                    <a class='menu-trigger'>
+                        <span>Menu</span>
+                    </a>
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- ***** Header Area End ***** -->
+
+<!-- ***** Welcome Area Start ***** -->
+<div class="welcome-area ab-hero" id="welcome">
+    <div class="header-text">
+        <div class="container">
+            <div class="row">
+                <div class="left-text col-lg-10 col-md-12">
+                    <h1>Architecture <em>Blueprints</em></h1>
+                    <p class="lead">A practical method for architecture target pictures on every level of an
+                        organisation: from enterprise strategy down to the individual system and the change that
+                        is under way right now. With templates, governance rules and a complete worked example.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ***** Welcome Area End ***** -->
+
+<section class="ab-page">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3">
+                <nav class="ab-toc" id="ab-toc"></nav>
+            </div>
+            <div class="col-lg-9">
+                <article class="ab-content">
+
+                    <h2 id="why">Why target pictures on every level?</h2>
+                    <p>Most organisations have target pictures, but they rarely connect. The enterprise strategy
+                        lives in board slides, domain roadmaps in spreadsheets, and system documentation in a
+                        wiki that the teams write for themselves. When a project starts, nobody can say which
+                        principles apply, who decides a deviation, or which target picture the change has to
+                        update afterwards. Decisions get lost, exceptions never expire, and the target pictures
+                        drift away from reality.</p>
+                    <p>This method connects the levels. Every level has a <strong>blueprint</strong>: a living
+                        document with the same structure, which inherits the principles of the level above,
+                        adds its own, and names the building blocks of the level below. Changes get a temporary
+                        blueprint that describes only the delta and is returned into the living blueprints
+                        before it is archived.</p>
+
+                    <h2 id="levels">The levels at a glance</h2>
+                    <div class="mermaid">
+flowchart TB
+  ENT["Enterprise Blueprint"]
+  DOM["Domain Blueprint"]
+  DP["Digital Product Blueprint"]
+  SYS["System Blueprint"]
+  PRG["Programme view"]
+  SOL["Solution Blueprint"]
+  ENT -->|principles| DOM -->|principles| DP -->|principles| SYS
+  PRG -->|one per plateau| SOL
+  SOL -.->|return| DP
+  SOL -.->|return| SYS
+                    </div>
+                    <table>
+                        <thead>
+                        <tr><th>Level</th><th>Artefact</th><th>Lifetime</th><th>Answers the question</th></tr>
+                        </thead>
+                        <tbody>
+                        <tr><td>Enterprise</td><td>Enterprise Blueprint</td><td>living</td><td>Where does the company want to go, and which rules apply to everyone?</td></tr>
+                        <tr><td>Domain</td><td>Domain Blueprint</td><td>living</td><td>How does a business area implement the strategy, and which patterns does it reuse?</td></tr>
+                        <tr><td>Digital Product</td><td>DP Blueprint</td><td>living</td><td>Which systems deliver a product, who owns them, and how do they evolve?</td></tr>
+                        <tr><td>System</td><td>System Blueprint (Buy or Make)</td><td>living</td><td>How is a single system built or configured, and does it meet the standards?</td></tr>
+                        <tr><td>Change</td><td>Solution Blueprint (full or light)</td><td>temporary</td><td>What exactly changes, and which decisions does the change take?</td></tr>
+                        <tr><td>Initiative</td><td>Programme view in the repository</td><td>temporary</td><td>In which plateaus does a large programme reach the target?</td></tr>
+                        </tbody>
+                    </table>
+
+                    <h2 id="ideas">Six ideas the method rests on</h2>
+                    <ol>
+                        <li><strong>One skeleton for all levels.</strong> Every blueprint uses the 12 chapters of
+                            <a href="https://arc42.org" target="_blank" rel="noopener">arc42</a> plus a 13th
+                            chapter for roadmap and transition. A profile per level says which chapters are
+                            required. Readers find the same content in the same place on every level.</li>
+                        <li><strong>Model first.</strong> Systems, interfaces, business objects, capabilities,
+                            principles and standards are objects in an architecture repository (ArchiMate).
+                            Documents reference their IDs and never copy them. Diagrams come from the
+                            repository.</li>
+                        <li><strong>Principles cascade.</strong> What a level defines as principles and patterns
+                            (chapters 4 and 8) appears as inherited constraints in chapter 2 of every blueprint
+                            below. Lower levels may refine a principle, never contradict it without a waiver.</li>
+                        <li><strong>Decisions where they belong.</strong> A decision is taken at the lowest level
+                            that covers all parties. Deviations from a principle or standard are decided by its
+                            owner and recorded as exception (temporary) or waiver (permanent).</li>
+                        <li><strong>Changes are temporary.</strong> A Solution Blueprint describes only the delta.
+                            Before it is archived, its decisions and changes are returned into the living
+                            blueprints and the model.</li>
+                        <li><strong>A quality gate, not a review board for everything.</strong> Deterministic
+                            checks run on every commit and block only on clear rule violations; AI findings
+                            advise and escalate only after a human confirms them.</li>
+                    </ol>
+
+                    <h2 id="example">A complete worked example</h2>
+<p><strong>Aurora Versicherung AG</strong>, a fictional mid-sized Swiss insurer, replaces its in-house non-life
+    policy system with a standard package, line of business by line of business, while claims and collections
+    stay on their legacy systems. The example contains a blueprint on every level, nine decisions including
+    exceptions and a waiver, and both Solution Blueprint profiles. Every document can be read right here on
+    the site.</p>
+<div class="ab-cards">
+    <a class="ab-card" href="example.html"><strong><i class="fa fa-map-o"></i> Guided tour</strong>
+        <span>Scenario, landscape, plateaus and four trails through the documents.</span></a>
+    <a class="ab-card" href="viewer.html?doc=example/01-enterprise-blueprint-aurora.md"><strong><i class="fa fa-file-text-o"></i> Enterprise Blueprint</strong>
+        <span>Start at the top and follow the links down to systems and changes.</span></a>
+    <a class="ab-card" href="viewer.html?doc=example/04-system-blueprint-novapolicy.md"><strong><i class="fa fa-file-text-o"></i> A System Blueprint</strong>
+        <span>See where target picture and reality meet: the compliance table.</span></a>
+</div>
+
+<h2 id="start">Where to start</h2>
+                    <div class="ab-cards">
+                        <a class="ab-card" href="method.html"><strong>Understand the method</strong>
+                            <span>Levels, chapter skeleton, model, cascade, decisions, change process, quality gate
+                                and roles in one reference.</span></a>
+                        <a class="ab-card" href="tutorial.html"><strong>Introduce it step by step</strong>
+                            <span>A tutorial in eleven steps, from the first sponsor conversation to a living set
+                                of blueprints.</span></a>
+                        <a class="ab-card" href="scaling.html"><strong>Size it to your company</strong>
+                            <span>What a small, a mid-sized and a large organisation needs, and how to collapse or
+                                add levels.</span></a>
+                        <a class="ab-card" href="example.html"><strong>See it applied</strong>
+                            <span>Aurora Versicherung AG replaces its non-life core system. Every level, every
+                                decision type, worked out.</span></a>
+                        <a class="ab-card" href="templates.html"><strong>Use the templates</strong>
+                            <span>Markdown templates for every level and for ADRs, ready to copy into a Git
+                                repository.</span></a>
+                    </div>
+
+                    <h3 id="paths" data-toc="Reading paths">Reading paths</h3>
+                    <table>
+                        <thead><tr><th>You are</th><th>Read</th></tr></thead>
+                        <tbody>
+                        <tr><td>Chief architect or head of enterprise architecture introducing the method</td>
+                            <td><a href="method.html">Method</a>, <a href="scaling.html">Scaling</a>, then the
+                                full <a href="tutorial.html">Tutorial</a></td></tr>
+                        <tr><td>Domain architect</td>
+                            <td><a href="method.html#cascade">Cascade</a>, <a href="method.html#decisions">Decisions</a>,
+                                tutorial steps 4, 5 and 7, the Aurora domain blueprint</td></tr>
+                        <tr><td>Solution architect or lead engineer</td>
+                            <td><a href="method.html#change">Change process</a>, tutorial steps 6 and 8, the Aurora
+                                system and solution blueprints</td></tr>
+                        <tr><td>Manager or sponsor</td>
+                            <td>This page, <a href="scaling.html">Scaling</a>, and chapters 1, 4 and 13 of the
+                                <a href="viewer.html?doc=example/01-enterprise-blueprint-aurora.md">Aurora Enterprise Blueprint</a></td></tr>
+                        </tbody>
+                    </table>
+
+                    <h2 id="foundations">Foundations</h2>
+                    <p>The method invents as little as possible. It combines established standards and adds only the
+                        rules that connect them.</p>
+                    <table>
+                        <thead><tr><th>Standard</th><th>What it is</th><th>Used for</th></tr></thead>
+                        <tbody>
+                        <tr><td>ISO/IEC/IEEE 42010:2022</td><td>international standard on what an architecture description must contain</td><td>meta-framework: stakeholders, concerns, viewpoints, views</td></tr>
+                        <tr><td>ArchiMate 3.2</td><td>modelling language for enterprise architecture by The Open Group</td><td>all diagrams and the model in the architecture repository</td></tr>
+                        <tr><td>TOGAF</td><td>The Open Group Architecture Framework, a method for enterprise architecture</td><td>vocabulary for transitions: plateaus, gaps, work packages</td></tr>
+                        <tr><td>BPMN 2.0</td><td>Business Process Model and Notation (ISO/IEC 19510)</td><td>business processes where a domain needs them</td></tr>
+                        <tr><td>arc42</td><td>free twelve-chapter template for architecture documentation</td><td>chapter skeleton of every blueprint</td></tr>
+                        <tr><td>Architecture Decision Records (MADR, Nygard)</td><td>short documents that record one decision each; MADR and Michael Nygard's format are the common templates</td><td>decisions, exceptions and waivers</td></tr>
+                        <tr><td>OpenAPI, AsyncAPI</td><td>machine-readable formats for describing synchronous (HTTP) and event-based interfaces</td><td>interface contracts</td></tr>
+                        <tr><td>Industry reference model, e.g. ACORD</td><td>ACORD is the standards body of the insurance industry; its reference models define common capabilities and business objects</td><td>capability map and business objects</td></tr>
+                        </tbody>
+                    </table>
+                    <p>All abbreviations and standards are explained in the <a href="glossary.html">glossary</a>.</p>
+
+                    <div class="ab-callout">
+                        <div class="ab-callout-title">Status</div>
+                        <p>The method is in active development. Writing the example surfaced a number of open
+                            questions; they are listed openly in the
+                            <a href="viewer.html?doc=example/FINDINGS.md">findings</a>, together with the decisions
+                            already taken on them.</p>
+                    </div>
+
+                    <div class="ab-pager">
+                        <span></span>
+                        <a href="method.html">Next: The method &rarr;</a>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- jQuery -->
+<script src="../assets/js/jquery-2.1.0.min.js"></script>
+<!-- Bootstrap -->
+<script src="../assets/js/popper.js"></script>
+<script src="../assets/js/bootstrap.min.js"></script>
+<!-- Plugins -->
+<script src="../assets/js/owl-carousel.js"></script>
+<script src="../assets/js/scrollreveal.min.js"></script>
+<script src="../assets/js/waypoints.min.js"></script>
+<script src="../assets/js/jquery.counterup.min.js"></script>
+<script src="../assets/js/imgfix.min.js"></script>
+<!-- Global Init -->
+<script src="../assets/js/custom.js"></script>
+<!-- Architecture pages -->
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+<script src="assets/docs.js?v=18"></script>
+<script src="assets/glossary.js?v=18"></script>
+<script src="assets/ids.js?v=18"></script>
+<script src="assets/architecture.js?v=18"></script>
+
+</body>
+</html>

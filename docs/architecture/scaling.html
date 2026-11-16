@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="How to size the Architecture Blueprint method for small, mid-sized and large organisations: which levels, artefacts, tools and governance bodies each one needs.">
+    <meta name="author" content="Arthur Neudeck">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap"
+          rel="stylesheet">
+
+    <title>Scaling | Architecture Blueprints</title>
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" type="text/css" href="../assets/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../assets/css/font-awesome.css">
+    <link rel="stylesheet" href="../assets/css/templatemo-lava.css">
+    <link rel="stylesheet" href="assets/architecture.css?v=18">
+</head>
+
+<body>
+
+<!-- ***** Preloader Start ***** -->
+<div id="preloader">
+    <div class="jumper">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+</div>
+<!-- ***** Preloader End ***** -->
+
+<!-- ***** Header Area Start ***** -->
+<header class="header-area header-sticky">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav class="main-nav">
+                    <a href="../index.html" class="logo">
+                        neudeck.ch
+                    </a>
+                    <ul class="nav">
+                        <li><a href="index.html">Overview</a></li>
+                        <li><a href="method.html">Method</a></li>
+                        <li><a href="tutorial.html">Tutorial</a></li>
+                        <li><a href="scaling.html" class="active">Scaling</a></li>
+                        <li><a href="example.html">Example</a></li>
+                        <li><a href="templates.html">Templates</a></li>
+                        <li><a href="glossary.html">Glossary</a></li>
+                    </ul>
+                    <a class='menu-trigger'>
+                        <span>Menu</span>
+                    </a>
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- ***** Header Area End ***** -->
+
+<!-- ***** Welcome Area Start ***** -->
+<div class="welcome-area ab-hero" id="welcome">
+    <div class="header-text">
+        <div class="container">
+            <div class="row">
+                <div class="left-text col-lg-10 col-md-12">
+                    <h1>Sizing for <em>small</em> and <em>large</em> companies</h1>
+                    <p class="lead">The method has six artefact types and four living levels. A 40-person company needs fewer of them, a group with several legal entities needs more. This page shows what to keep, what to collapse and what to add.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ***** Welcome Area End ***** -->
+
+<section class="ab-page">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3">
+                <nav class="ab-toc" id="ab-toc"></nav>
+            </div>
+            <div class="col-lg-9">
+                <article class="ab-content">
+<h2 id="principle">The scaling rule</h2>
+<p>Levels exist to place decisions and accountability. A level is worth introducing only if
+    <strong>someone is accountable for it</strong> and <strong>decisions are regularly taken at it</strong>.
+    If nobody would own a Domain Blueprint, do not write one: let the level above cover it. If two
+    business units decide independently about the same kind of question, they need their own level.</p>
+<p>Whatever the size, three things never go away:</p>
+<ul>
+    <li>the same chapter skeleton on every level you keep,</li>
+    <li>stable IDs for systems, principles and standards,</li>
+    <li>ADRs with owner and expiry for every deviation.</li>
+</ul>
+
+<h2 id="profiles">Three size profiles</h2>
+<table>
+    <thead>
+    <tr><th></th><th>Small</th><th>Mid-sized</th><th>Large</th></tr>
+    </thead>
+    <tbody>
+    <tr><td><strong>Typical size</strong></td><td>up to ~50 IT staff, up to ~40 systems, one or two architects</td>
+        <td>50&ndash;500 IT staff, 40&ndash;300 systems, an architecture team (the Aurora case)</td>
+        <td>group with several companies or countries, hundreds of systems, federated architecture</td></tr>
+    <tr><td><strong>Living levels</strong></td><td>Enterprise and System; DPs as a grouping in the Enterprise Blueprint</td>
+        <td>Enterprise, Domain, DP, System</td>
+        <td>Group, Enterprise per entity, Domain (with sub-domains if needed), DP, System</td></tr>
+    <tr><td><strong>Enterprise Blueprint</strong></td><td>one document, also covers domains and DPs (chapter 5 lists DPs with their systems)</td>
+        <td>one document</td>
+        <td>a Group Blueprint with group principles, plus one Enterprise Blueprint per entity</td></tr>
+    <tr><td><strong>Domain Blueprints</strong></td><td>none; domain principles live in the Enterprise Blueprint</td>
+        <td>one per domain</td>
+        <td>one per domain, possibly shared across entities</td></tr>
+    <tr><td><strong>DP Blueprints</strong></td><td>only for the one or two products with several systems</td>
+        <td>one per DP</td>
+        <td>one per DP</td></tr>
+    <tr><td><strong>System Blueprints</strong></td><td>core systems and own developments only; the rest is a row in the model</td>
+        <td>target systems and systems under change</td>
+        <td>all systems with PII or critical availability, others on change</td></tr>
+    <tr><td><strong>Solution Blueprints</strong></td><td>light profile for deviations; full profile only for large changes</td>
+        <td>light and full, per triage</td>
+        <td>light and full; per plateau in initiatives</td></tr>
+    <tr><td><strong>Triage</strong></td><td>five questions, asked by the architect</td>
+        <td>full questionnaire at Definition of Ready, pre-filled from the model</td>
+        <td>full questionnaire, automated pre-fill mandatory</td></tr>
+    <tr><td><strong>Repository</strong></td><td>an open-source ArchiMate tool or a spreadsheet/YAML in Git with stable IDs</td>
+        <td>commercial ArchiMate repository (ADOIT in the example)</td>
+        <td>commercial repository with CMDB integration and an agreed group metamodel</td></tr>
+    <tr><td><strong>Quality gate</strong></td><td>checklist in the pull request template</td>
+        <td>deterministic rules automated; AI hints optional</td>
+        <td>fully automated; AI checks against model export</td></tr>
+    <tr><td><strong>Governance</strong></td><td>CTO and architect decide; function owners (security, data protection) for their standards</td>
+        <td>Architecture Board; domain architects; delegation matrix</td>
+        <td>Group board plus entity boards; delegation matrix per entity; function owners at group and entity level</td></tr>
+    <tr><td><strong>Effort to start</strong></td><td>a few weeks of one architect</td>
+        <td>one quarter for the first vertical slice</td>
+        <td>a programme: metamodel and gate first, then slices per entity</td></tr>
+    </tbody>
+</table>
+
+<h2 id="small">Small organisations</h2>
+<p>In a small company, the same few people sit at every level. Separate documents per level would only
+    repeat each other. Collapse instead:</p>
+<ul>
+    <li><strong>One Enterprise Blueprint does the work of three levels.</strong> Chapter 4 contains the
+        enterprise principles, chapter 5 lists the digital products with their systems and owners, chapter 8
+        the patterns. Add a domain section only if you really have distinct business areas with their own
+        rules.</li>
+    <li><strong>System Blueprints for what matters.</strong> The core system, every own development and every
+        system with personal data. A SaaS tool with no integration is a row in the model, nothing more.</li>
+    <li><strong>Lightweight model.</strong> A table with stable IDs and the minimum attributes is enough to
+        start. Move to a real repository when you have more than about 40 systems or need generated
+        views.</li>
+    <li><strong>Decision rights stay explicit.</strong> Even if the CTO decides almost everything, write the
+        ADRs. The exception register is the cheapest risk management you can get.</li>
+    <li><strong>Triage in five questions:</strong> Which systems change? Does an interface to another product
+        change? Is personal data affected? Is a principle or standard not met? Is it part of a larger
+        programme?</li>
+</ul>
+<div class="ab-callout ab-tip">
+    <div class="ab-callout-title">Minimal set for a small company</div>
+    <p>One Enterprise Blueprint, System Blueprints for core systems, the ADR template, the light Solution
+        Blueprint, and a pull request checklist. That is five templates out of eight.</p>
+</div>
+
+<h2 id="mid">Mid-sized organisations</h2>
+<p>The method is designed for this size; the <a href="example.html">Aurora example</a> is mid-sized. Use all
+    levels and both Solution Blueprint profiles. Two things decide whether it works:</p>
+<ul>
+    <li><strong>Accountable DP managers.</strong> Without named business and IT owners per DP, model objects
+        are not maintained and the DP Blueprints decay.</li>
+    <li><strong>Automated deterministic checks</strong> before the second domain joins. Manual review does not
+        keep the cascade consistent beyond one domain.</li>
+</ul>
+
+<h2 id="large">Large organisations</h2>
+<p>Large organisations need more levels, not bigger documents. The skeleton stays the same; the hierarchy
+    grows.</p>
+<h3 id="add-level" data-toc="Adding levels">Adding levels</h3>
+<ul>
+    <li><strong>Group level above Enterprise.</strong> A Group Blueprint uses the enterprise profile and holds
+        group principles and standards, typically regulatory, security and shared platforms. Each legal entity
+        or country keeps its own Enterprise Blueprint and inherits the group principles in chapter 2.</li>
+    <li><strong>Sub-domains.</strong> If a domain has more than about ten DPs, split it. A sub-domain uses the
+        domain profile; its parent domain's chapter 5 lists sub-domains instead of DPs.</li>
+    <li><strong>Shared domains across entities.</strong> A domain that serves several entities (for example a
+        group-wide finance platform) is owned at group level and appears in each entity's Enterprise Blueprint
+        as a building block.</li>
+</ul>
+<h3 id="federate" data-toc="Federated governance">Federated governance</h3>
+<ul>
+    <li><strong>Owner functions exist at several levels.</strong> A group CISO owns group security standards;
+        an entity CISO may own an entity-specific refinement. The owner of the violated standard decides, as
+        everywhere in the method.</li>
+    <li><strong>Delegation matrix per entity.</strong> Group owners delegate to entity level for exceptions
+        within defined bounds; entities delegate further to domains and DPs.</li>
+    <li><strong>One metamodel.</strong> Agree attributes and ID conventions across the group before modelling.
+        Prefix IDs per entity if needed (<code>CH-SYS-</code>, <code>DE-SYS-</code>).</li>
+    <li><strong>Generated views only.</strong> Programme views, exception registers and model quality figures
+        must be reports from the repository. Hand-maintained overviews do not survive at this scale.</li>
+</ul>
+
+<h2 id="signals">Signals that you need to change your profile</h2>
+<table>
+    <thead><tr><th>Signal</th><th>Action</th></tr></thead>
+    <tbody>
+    <tr><td>Chapter 5 of the Enterprise Blueprint lists more than ~8 products with very different rules</td><td>introduce domains</td></tr>
+    <tr><td>Two teams argue about the same interface every quarter</td><td>clarify DP boundaries; give the interface an owner</td></tr>
+    <tr><td>Exceptions pile up at the Architecture Board</td><td>introduce or widen the delegation matrix</td></tr>
+    <tr><td>Reviews find the same missing chapter-2 entries again and again</td><td>automate the gate</td></tr>
+    <tr><td>Entities copy and edit each other's principles</td><td>introduce a group level</td></tr>
+    <tr><td>Nobody reads a level's blueprint and no decision is taken there</td><td>collapse that level into the one above</td></tr>
+    </tbody>
+</table>
+
+<div class="ab-pager">
+    <a href="tutorial.html">&larr; Tutorial</a>
+    <a href="example.html">Next: Example &rarr;</a>
+</div>
+                </article>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- jQuery -->
+<script src="../assets/js/jquery-2.1.0.min.js"></script>
+<!-- Bootstrap -->
+<script src="../assets/js/popper.js"></script>
+<script src="../assets/js/bootstrap.min.js"></script>
+<!-- Plugins -->
+<script src="../assets/js/owl-carousel.js"></script>
+<script src="../assets/js/scrollreveal.min.js"></script>
+<script src="../assets/js/waypoints.min.js"></script>
+<script src="../assets/js/jquery.counterup.min.js"></script>
+<script src="../assets/js/imgfix.min.js"></script>
+<!-- Global Init -->
+<script src="../assets/js/custom.js"></script>
+<!-- Architecture pages -->
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+<script src="assets/docs.js?v=18"></script>
+<script src="assets/glossary.js?v=18"></script>
+<script src="assets/ids.js?v=18"></script>
+<script src="assets/architecture.js?v=18"></script>
+
+</body>
+</html>

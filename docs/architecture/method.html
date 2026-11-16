@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="Reference of the Architecture Blueprint method: levels, chapter skeleton, model, principle cascade, decisions, change process, quality gate and roles.">
+    <meta name="author" content="Arthur Neudeck">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&display=swap"
+          rel="stylesheet">
+
+    <title>The method | Architecture Blueprints</title>
+
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" type="text/css" href="../assets/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="../assets/css/font-awesome.css">
+    <link rel="stylesheet" href="../assets/css/templatemo-lava.css">
+    <link rel="stylesheet" href="assets/architecture.css?v=18">
+</head>
+
+<body>
+
+<!-- ***** Preloader Start ***** -->
+<div id="preloader">
+    <div class="jumper">
+        <div></div>
+        <div></div>
+        <div></div>
+    </div>
+</div>
+<!-- ***** Preloader End ***** -->
+
+<!-- ***** Header Area Start ***** -->
+<header class="header-area header-sticky">
+    <div class="container">
+        <div class="row">
+            <div class="col-12">
+                <nav class="main-nav">
+                    <a href="../index.html" class="logo">
+                        neudeck.ch
+                    </a>
+                    <ul class="nav">
+                        <li><a href="index.html">Overview</a></li>
+                        <li><a href="method.html" class="active">Method</a></li>
+                        <li><a href="tutorial.html">Tutorial</a></li>
+                        <li><a href="scaling.html">Scaling</a></li>
+                        <li><a href="example.html">Example</a></li>
+                        <li><a href="templates.html">Templates</a></li>
+                        <li><a href="glossary.html">Glossary</a></li>
+                    </ul>
+                    <a class='menu-trigger'>
+                        <span>Menu</span>
+                    </a>
+                </nav>
+            </div>
+        </div>
+    </div>
+</header>
+<!-- ***** Header Area End ***** -->
+
+<!-- ***** Welcome Area Start ***** -->
+<div class="welcome-area ab-hero" id="welcome">
+    <div class="header-text">
+        <div class="container">
+            <div class="row">
+                <div class="left-text col-lg-10 col-md-12">
+                    <h1>The <em>method</em></h1>
+                    <p class="lead">The complete reference: which artefacts exist on which level, how they are structured, how principles and decisions flow between them, and how changes find their way back into the target pictures.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ***** Welcome Area End ***** -->
+
+<section class="ab-page">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3">
+                <nav class="ab-toc" id="ab-toc"></nav>
+            </div>
+            <div class="col-lg-9">
+                <article class="ab-content">
+<h2 id="levels">1 Levels and artefacts</h2>
+<p>The method distinguishes four <strong>living</strong> levels and two <strong>temporary</strong> ones.
+    Living blueprints are maintained continuously and always describe the current target picture.
+    Temporary artefacts exist only while a change or an initiative is running.</p>
+<table>
+    <thead><tr><th>Level</th><th>Artefact</th><th>Lifetime</th><th>Building blocks described (chapter 5)</th></tr></thead>
+    <tbody>
+    <tr><td>Enterprise</td><td>Enterprise Blueprint</td><td>living</td><td>domains</td></tr>
+    <tr><td>Domain</td><td>Domain Blueprint, including principles, patterns and ADRs</td><td>living</td><td>digital products</td></tr>
+    <tr><td>Digital Product (DP)</td><td>DP Blueprint: arc42, roadmap, target picture</td><td>living</td><td>systems</td></tr>
+    <tr><td>System</td><td>System Blueprint, profile <em>Buy</em> or <em>Make</em></td><td>living</td><td>modules and configuration (Buy) or components (Make)</td></tr>
+    <tr><td>Change</td><td>Solution Blueprint, profile <em>full</em> or <em>light</em></td><td>temporary, archived after return</td><td>only the delta</td></tr>
+    <tr><td>Initiative</td><td>Programme view in the repository: plateaus, gaps, work packages</td><td>temporary, spans levels</td><td>&ndash;</td></tr>
+    </tbody>
+</table>
+
+<h3 id="dp" data-toc="Digital products">Why a digital product level?</h3>
+<p>Domains are too large to plan budgets and accountability for, systems are too small. A
+    <strong>digital product</strong> groups the systems that together deliver a business outcome, and
+    gives them a pair of accountable owners: a DP Manager Business and a DP Manager IT. Two rules keep the
+    structure clean:</p>
+<ul>
+    <li>Every DP belongs to exactly one domain, and every system to exactly one DP.</li>
+    <li>Interaction across DPs is treated like interaction across domains: it raises the change class
+        (see <a href="#change">change process</a>).</li>
+</ul>
+<p>Shared platforms such as integration, identity, logging or archive are DPs of their own, typically in a
+    technology platform domain.</p>
+
+<h2 id="skeleton">2 One skeleton for all levels</h2>
+<p>Every blueprint follows the arc42 chapters, extended by chapter 13 for roadmap and transition. The
+    meaning of each chapter stays the same on every level; only the subject changes. This is what makes
+    the cascade work: an architect always knows where to look.</p>
+<table>
+    <thead><tr><th>Chapter</th><th>Content on every level</th></tr></thead>
+    <tbody>
+    <tr><td>1 Introduction and goals</td><td>business goals; on enterprise level the strategy and a capability heatmap</td></tr>
+    <tr><td>2 Constraints</td><td>principles and standards <strong>inherited</strong> from the levels above, with the local interpretation</td></tr>
+    <tr><td>3 Context</td><td>the boundary of the described object and its neighbours</td></tr>
+    <tr><td>4 Solution strategy</td><td>the level's <strong>own principles</strong> and architecture strategy</td></tr>
+    <tr><td>5 Building blocks</td><td>the building blocks of the next lower level: domains, DPs, systems, components</td></tr>
+    <tr><td>6 Runtime, 7 Deployment</td><td>mainly on system level</td></tr>
+    <tr><td>8 Cross-cutting concepts</td><td>patterns the level offers to the levels below</td></tr>
+    <tr><td>9 Decisions</td><td>index of the ADRs owned by this level</td></tr>
+    <tr><td>10 Quality requirements</td><td>quality goals and scenarios</td></tr>
+    <tr><td>11 Risks, technical debt, exceptions</td><td>open risks, debt and exceptions with owner and expiry</td></tr>
+    <tr><td>12 Glossary</td><td>terms</td></tr>
+    <tr><td>13 Roadmap and transition</td><td>plateaus and transition steps, fed from the programme view</td></tr>
+    </tbody>
+</table>
+<p>Which chapters are required for which profile is defined in the
+    <a href="viewer.html?doc=templates/README.md">chapter matrix of the template set</a>. As a rule of thumb:
+    chapters 1, 2, 9 and 11 are required everywhere; runtime and deployment matter on system level; roadmap
+    matters on enterprise, domain and DP level.</p>
+
+<h3 id="profiles" data-toc="Buy and Make profiles">Buy and Make profiles</h3>
+<p>A purchased system and a self-built one need different documentation. The <strong>Buy</strong> profile
+    treats the vendor's internals as a black box and documents what the organisation owns: licensed modules
+    in use, configuration, extension points and their upgrade risk, hosting and release cycle. The
+    <strong>Make</strong> profile documents components, runtime and deployment in classic arc42 depth.</p>
+
+<h2 id="model">3 Model first</h2>
+<p>Text and model have separate masters. Markdown in Git is the master for text and reasoning; the
+    architecture repository: a modelling tool for ArchiMate, the standard language for enterprise architecture
+    models. The example uses ADOIT by BOC Group; any ArchiMate repository works is the master for every model
+    element and every diagram.</p>
+<ul>
+    <li><strong>Everything that is checked or linked is a repository object</strong>, including principles
+        and standards. Documents reference repository IDs and never duplicate their content.</li>
+    <li><strong>Diagrams live in the repository</strong> and are embedded with a marker such as
+        <code>&lt;!-- adoit-view: VIEW-ID --&gt;</code>; the publishing pipeline replaces it with the current
+        export.</li>
+    <li><strong>No manual ID linking.</strong> Relations are maintained in the repository, not typed into
+        documents twice.</li>
+</ul>
+<h3 id="depth" data-toc="Minimum modelling depth">Minimum modelling depth</h3>
+<p>The model has to be good enough for automated checks, not complete. The minimum is:</p>
+<table>
+    <thead><tr><th>Object</th><th>Required attributes and relations</th><th>Enables</th></tr></thead>
+    <tbody>
+    <tr><td>System</td><td>ID, name, aliases, domain and DP, profile (buy/make), lifecycle, hosting, PII flag</td><td>finding systems in text by alias, deriving applicable standards</td></tr>
+    <tr><td>Interface</td><td>source, target, type, business objects, lifecycle</td><td>context views, detecting cross-DP changes</td></tr>
+    <tr><td>Business object</td><td>data classification, PII, system of record</td><td>privacy and residency checks</td></tr>
+    <tr><td>Capability</td><td>relation to systems and strategic goals, heat</td><td>heatmaps, impact of changes</td></tr>
+    <tr><td>Principle, standard</td><td>owner function, anchor level, version, applicability rule</td><td>cascade check, exception authority</td></tr>
+    </tbody>
+</table>
+<p>Systems carry <strong>aliases</strong> because people write "Nova" or "the new policy system"
+    instead of an ID. With aliases, an automated check can still connect text to model.</p>
+
+<h3 id="notation" data-toc="Notation">Notation</h3>
+<p>All diagrams are ArchiMate views. The method does not add a second notation such as C4, but applies C4's
+    zoom discipline inside ArchiMate viewpoints: each level shows its own building blocks and their direct
+    neighbours, nothing more. UML sequence diagrams are allowed as an exception for runtime views. BPMN is
+    used for business processes where a domain needs them.</p>
+
+<h2 id="cascade">4 The principle cascade</h2>
+<p>Principles and patterns flow downwards. What a level defines in chapters 4 and 8 appears in chapter 2 of
+    every blueprint below it, together with the local interpretation. A lower level may <em>refine</em> a
+    principle (make it more specific), but never contradict it without a waiver.</p>
+<div class="mermaid">
+flowchart LR
+  EP["EP-02 (Enterprise, ch. 4)<br/>Integrate via the integration platform,<br/>no point-to-point"]
+  DPP["DPP-02 (Domain, ch. 4)<br/>Consumers are shielded from<br/>policy system changes"]
+  DPC["DP Blueprint ch. 2<br/>inherits EP-02 and DPP-02"]
+  SYS["System Blueprint ch. 2<br/>EP-02: partly met<br/>&rarr; technical debt TD-PANL-002"]
+  EP -->|refined by| DPP
+  EP -->|inherited| DPC
+  DPP -->|inherited| DPC
+  DPC -->|inherited| SYS
+</div>
+<p>On system level, chapter 2 turns into a compliance table: for every applicable principle and standard,
+    the blueprint states why it applies (derived from system attributes) and whether it is fulfilled
+    <em>yes</em>, <em>partly</em> or <em>no</em>. Anything other than <em>yes</em> needs an ADR. This is the
+    place where target picture and reality meet.</p>
+
+<h2 id="decisions">5 Decisions, exceptions and waivers</h2>
+<p>All decisions are Architecture Decision Records stored with the living blueprint that owns them. There are
+    three types:</p>
+<table>
+    <thead><tr><th>Type</th><th>Use</th><th>Required extra fields</th></tr></thead>
+    <tbody>
+    <tr><td><strong>decision</strong></td><td>an architecture choice within the rules</td><td>&ndash;</td></tr>
+    <tr><td><strong>exception</strong></td><td>a temporary deviation from a principle or standard</td><td>owner, deciding level, compensating control, expiry date, technical debt ticket, path back to compliance</td></tr>
+    <tr><td><strong>waiver</strong></td><td>a permanent deviation; it forces a change of the principle</td><td>required change of the principle, owner, deadline; stays open until the principle is changed</td></tr>
+    </tbody>
+</table>
+<p>Every ADR ends with a <strong>rationale for the level below</strong>: a plain-language explanation that
+    teams who have to live with the decision can understand.</p>
+
+<h3 id="placement" data-toc="Where a decision is taken">Where a decision is taken</h3>
+<p>A decision is taken at the <strong>lowest level that covers all parties</strong>: system, then DP, then
+    domain, then enterprise. A decision inside one system stays in its System Blueprint; one that changes
+    several systems of a DP goes to the DP Blueprint; one that forces other domains to act goes to the
+    Enterprise Blueprint.</p>
+
+<h3 id="authority" data-toc="Who decides deviations">Who decides deviations</h3>
+<p>A deviation is decided by the <strong>owner of the principle or standard</strong> that is not met. Every
+    principle and standard has an owner function (for example the CISO for a security standard, the
+    Architecture Board for an enterprise principle) and an anchor level that places it in the cascade.
+    Both are repository attributes.</p>
+<p>To keep owners from becoming a bottleneck, exceptions are delegated by a default matrix:</p>
+<table>
+    <thead><tr><th>Exception</th><th>Decided by</th></tr></thead>
+    <tbody>
+    <tr><td>up to 6 months, compensating control, no data above "internal"</td><td>DP level</td></tr>
+    <tr><td>up to 12 months, compensating control</td><td>Domain level</td></tr>
+    <tr><td>everything else, and every waiver</td><td>owner of the principle or standard</td></tr>
+    </tbody>
+</table>
+<p>Owners may tighten or loosen the matrix for their object, for example "data residency: always the
+    owner". Every criterion can be checked automatically: the duration from date and expiry, the
+    compensating control as a required field, the data classification from the model.</p>
+
+<h2 id="change">6 The change process</h2>
+<p>Every demand passes an <strong>architecture triage</strong> at Definition of Ready. The triage is a short
+    questionnaire (about 14 questions), pre-filled from the repository wherever possible: which systems,
+    interfaces, DPs and business objects are affected, whether personal data is involved, whether principles
+    or standards are not met. Its result is a change class, and the class decides the artefact.</p>
+<div class="mermaid">
+flowchart TB
+  D[Demand] --> T{Architecture triage<br/>at Definition of Ready}
+  T -->|Run| R[Pull request on<br/>System / DP Blueprint]
+  T -->|Deviation| L[Solution Blueprint light<br/>+ exception ADR]
+  T -->|Change| F[Solution Blueprint full]
+  T -->|Initiative| P[Programme view<br/>+ Solution Blueprint per plateau]
+  L --> G[Quality gate]
+  F --> G
+  P --> F
+  R --> G
+  G --> I[Implementation]
+  I --> RET[Return into living<br/>blueprints and model]
+  RET --> A[Archive]
+</div>
+<table>
+    <thead><tr><th>Class</th><th>Trigger</th><th>Artefact</th></tr></thead>
+    <tbody>
+    <tr><td>Run</td><td>change within one system or DP, all rules met</td><td>pull request on the System or DP Blueprint</td></tr>
+    <tr><td>Deviation</td><td>a principle or standard is not met</td><td>Solution Blueprint light (chapters 1, 2, 9, 11) + exception or waiver ADR</td></tr>
+    <tr><td>Change</td><td>across DPs or domains</td><td>Solution Blueprint full, tailored to the change</td></tr>
+    <tr><td>Initiative</td><td>programme with several plateaus</td><td>programme view in the repository + one Solution Blueprint per plateau</td></tr>
+    </tbody>
+</table>
+
+<h3 id="return" data-toc="Return and archive">Return before archive</h3>
+<p>A Solution Blueprint describes only the <strong>delta</strong> to the living blueprints. When the change is
+    implemented, a return checklist moves everything that remains valid to where it belongs:</p>
+<ul>
+    <li>ADRs move to the lowest living blueprint that covers all parties.</li>
+    <li>System, DP and Domain Blueprints are updated.</li>
+    <li>The model is updated: new interfaces, retired temporary systems, plateau status.</li>
+    <li>Exceptions and technical debt are registered with owner and expiry date.</li>
+    <li>Reuse is checked: a solution reused a second time becomes a domain pattern.</li>
+</ul>
+<p>Only then is the Solution Blueprint archived. Reusing a solution creates a new Solution Blueprint that
+    references its predecessor, never an edit of the old one.</p>
+
+<h3 id="programme" data-toc="Initiatives">Initiatives and the programme view</h3>
+<p>Large programmes move through <strong>plateaus</strong>: stable intermediate states such as "motor live
+    on the new system". Plateaus, gaps and work packages are modelled in the repository (TOGAF vocabulary)
+    and appear in chapter 13 of every affected blueprint. Each plateau is delivered by one Solution
+    Blueprint. There is no hand-written programme document: the programme view is a report generated from
+    the repository.</p>
+
+<h2 id="gate">7 The quality gate</h2>
+<p>Blueprints live in Git. Every commit runs checks; merge and publication are blocked only by errors.</p>
+<table>
+    <thead><tr><th>Severity</th><th>Effect</th><th>Source</th></tr></thead>
+    <tbody>
+    <tr><td>Hint</td><td>advisory</td><td>AI</td></tr>
+    <tr><td>Warning</td><td>must be acknowledged in the pull request</td><td>AI or rules</td></tr>
+    <tr><td>Error</td><td>blocks merge and publication</td><td>deterministic rules; AI findings only after a human confirms them</td></tr>
+    </tbody>
+</table>
+<p>Typical deterministic rules: required chapters of the profile present; front matter complete;
+    reviewer differs from responsible; every referenced ID exists in the model; chapter 2 lists all principles
+    and standards that apply by system attributes; every <em>partly</em> or <em>no</em> has an ADR; every
+    exception has an expiry date in the future and a deciding level allowed by the delegation matrix.</p>
+<p>AI checks compare the text with an export of the model, never with diagram images. They find, for
+    example, a system mentioned by alias but missing from the context chapter, or a claim that contradicts a
+    principle. An error is overridden only by the owner of the violated rule, via ADR.</p>
+
+<h2 id="enhance">8 Enhancing the target pictures</h2>
+<p>Target pictures are never finished. New demands arrive that the current blueprints do not cover:
+    a new channel, a new product, a regulation. The method handles them with the same building blocks
+    as any other change, but one rule matters more than usual: <strong>each decision is recorded at
+    its own level as soon as it is taken</strong>, while everything that depends on implementation
+    returns later.</p>
+<div class="mermaid">
+flowchart TB
+  D[New demand] --> T{Triage<br/>incl. strategic fit}
+  T -->|"no strategic goal covers it"| E["Enterprise level:<br/>new or changed goal + ADR"]
+  T -->|"goal exists"| P
+  E --> P["Place each decision at its level:<br/>enterprise, domain, DP, system"]
+  P --> M["Model new objects in the repository<br/>with lifecycle 'planned'"]
+  M --> R["Plan plateaus, incl. dependencies<br/>on other programmes"]
+  R --> S["Solution Blueprint per plateau<br/>(the delta)"]
+  S --> I[Implementation]
+  I --> RET["Return: remaining blueprints updated,<br/>'planned' becomes 'target'"]
+</div>
+<ol>
+    <li><strong>Triage, including strategic fit.</strong> Which strategic goal does the demand serve? If
+        none does, the demand is not rejected but escalated: the enterprise level decides whether the
+        strategy changes. (Making this a fixed triage question is open point F12 in the
+        <a href="viewer.html?doc=example%2FFINDINGS.md">findings</a>.)</li>
+    <li><strong>Strategy first.</strong> A new or changed goal goes into chapter 1 of the Enterprise
+        Blueprint, the reasoning into an enterprise ADR, and the capability heatmap is recoloured.</li>
+    <li><strong>Decisions at their level, immediately.</strong> Every decision the demand forces is placed by
+        the usual rule (lowest level covering all parties; deviations by the owner of the rule) and stored
+        in that level's blueprint right away. The Solution Blueprint lists these ADRs but does not own
+        them.</li>
+    <li><strong>Model the planned state.</strong> New systems, interfaces and attributes are created in the
+        repository with lifecycle <em>planned</em>. That lets roadmaps (chapter 13) and context views show
+        the coming target picture before anything is built.</li>
+    <li><strong>Plateaus and dependencies.</strong> The enhancement gets its own plateaus. If they depend on
+        another programme's plateaus, the dependency is shown in every affected roadmap.</li>
+    <li><strong>Solution Blueprint for the delta</strong>, one per plateau, with the return checklist naming
+        every living blueprint that still has to change.</li>
+    <li><strong>Return.</strong> After implementation, DP and System Blueprints are written or updated, the
+        remaining ADRs move to their owners, and <em>planned</em> becomes <em>target</em> in the model.</li>
+</ol>
+<table>
+    <thead><tr><th>Changes immediately, with the decision</th><th>Changes on return, after implementation</th></tr></thead>
+    <tbody>
+    <tr><td>strategic goals and heatmap (Enterprise ch. 1)</td><td>new DP Blueprints and System Blueprints</td></tr>
+    <tr><td>enterprise and domain ADRs (ch. 9 of their blueprints)</td><td>building blocks and context of existing System Blueprints (ch. 3, 5)</td></tr>
+    <tr><td>architecture strategy and principles, if affected (ch. 4)</td><td>DP context with new cross-DP interfaces (ch. 3)</td></tr>
+    <tr><td>roadmaps with the new plateaus (ch. 13), risks (ch. 11)</td><td>ADRs of the change's own level</td></tr>
+    <tr><td>new model objects with lifecycle <em>planned</em></td><td>lifecycle <em>planned</em> &rarr; <em>target</em></td></tr>
+    </tbody>
+</table>
+<div class="ab-callout ab-example">
+    <div class="ab-callout-title">Worked example</div>
+    <p>Aurora adds a <a href="example.html#enhancement">customer portal</a>: a new goal SG-5 and channel
+        decision ADR-ENT-004 at enterprise level, a customer identity platform (ADR-ENT-005), a policy query
+        API decided in the policy domain (ADR-DOM-002), and Solution Blueprint SB-005 for the delta.</p>
+</div>
+
+<h2 id="roles">9 Roles and ownership</h2>
+<table>
+    <thead><tr><th>Role</th><th>Accountable for</th></tr></thead>
+    <tbody>
+    <tr><td>Architecture Board (chief architect)</td><td>Enterprise Blueprint, enterprise principles, cross-domain decisions</td></tr>
+    <tr><td>Function owners (e.g. CISO, data protection, compliance)</td><td>their standards and the exceptions to them</td></tr>
+    <tr><td>Domain architect</td><td>Domain Blueprint, domain principles and patterns</td></tr>
+    <tr><td>DP Manager Business</td><td>DP Blueprint and model objects of the business side: business objects, data classification, capability relations</td></tr>
+    <tr><td>DP Manager IT</td><td>DP Blueprint and model objects of the IT side: systems, aliases, interfaces</td></tr>
+    <tr><td>Solution architect (one per DP)</td><td>reviews the DP's blueprints; writes Solution Blueprints</td></tr>
+    <tr><td>Lead engineer</td><td>System Blueprints, as delegated author</td></tr>
+    </tbody>
+</table>
+<p>Accountability stays with the DP managers; the work can be delegated to solution architects and lead
+    engineers. The reviewer of a blueprint is never its author.</p>
+
+<div class="ab-pager">
+    <a href="index.html">&larr; Overview</a>
+    <a href="tutorial.html">Next: Tutorial &rarr;</a>
+</div>
+                </article>
+            </div>
+        </div>
+    </div>
+</section>
+
+<!-- jQuery -->
+<script src="../assets/js/jquery-2.1.0.min.js"></script>
+<!-- Bootstrap -->
+<script src="../assets/js/popper.js"></script>
+<script src="../assets/js/bootstrap.min.js"></script>
+<!-- Plugins -->
+<script src="../assets/js/owl-carousel.js"></script>
+<script src="../assets/js/scrollreveal.min.js"></script>
+<script src="../assets/js/waypoints.min.js"></script>
+<script src="../assets/js/jquery.counterup.min.js"></script>
+<script src="../assets/js/imgfix.min.js"></script>
+<!-- Global Init -->
+<script src="../assets/js/custom.js"></script>
+<!-- Architecture pages -->
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
+<script src="assets/docs.js?v=18"></script>
+<script src="assets/glossary.js?v=18"></script>
+<script src="assets/ids.js?v=18"></script>
+<script src="assets/architecture.js?v=18"></script>
+
+</body>
+</html>
