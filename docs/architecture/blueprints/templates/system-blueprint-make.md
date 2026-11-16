@@ -35,11 +35,14 @@ last_reviewed: YYYY-MM-DD
 
 ## 5 Building blocks
 <!-- adoit-view: SYSTEM-COMPONENTS-ID -->
+<!-- Components with their responsibilities and the interfaces (ADOIT IDs) they serve. -->
 ### 5.1 Level 1: components
 ### 5.2 Level 2: selected components in detail (optional)
 
 ## 6 Runtime
-<!-- Key scenarios; UML sequence diagrams allowed as exception. -->
+<!-- adoit-view: RUNTIME-<SCENARIO>-ID -->
+<!-- One view per key scenario (UML sequence diagram allowed as exception): the main business
+     scenario, one error or fallback case, and every scenario named in the quality goals. -->
 
 ## 7 Deployment
 <!-- adoit-view: SYSTEM-DEPLOYMENT-ID -->

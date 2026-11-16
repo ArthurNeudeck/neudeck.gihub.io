@@ -36,7 +36,10 @@ last_reviewed: YYYY-MM-DD
 ## 4 Solution strategy (optional)
 
 ## 5 Building blocks: modules, configuration, extensions
-<!-- The vendor's internal structure is a black box. Document what Aurora owns. -->
+<!-- adoit-view: SYSTEM-BUILDING-BLOCKS-ID -->
+<!-- The vendor's internal structure is a black box. The view shows what Aurora owns: licensed
+     modules in use (and licensed but unused), configuration objects, Aurora's extensions, and the
+     interfaces they serve. -->
 ### 5.1 Licensed modules in use
 ### 5.2 Configuration (product definition, rules, workflows)
 ### 5.3 Extension points and custom code
@@ -44,7 +47,10 @@ last_reviewed: YYYY-MM-DD
 |---|---|---|---|
 
 ## 6 Runtime
-<!-- Key scenarios; UML sequence diagrams allowed as exception. -->
+<!-- adoit-view: RUNTIME-<SCENARIO>-ID -->
+<!-- One view per key scenario (UML sequence diagram allowed as exception): the main business
+     scenario, one error or fallback case, and every scenario named in the quality goals. -->
+<!-- For Buy systems also: how a configuration change reaches production. -->
 
 ## 7 Deployment
 <!-- adoit-view: SYSTEM-DEPLOYMENT-ID -->

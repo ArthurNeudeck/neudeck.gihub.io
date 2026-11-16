@@ -39,8 +39,18 @@ last_reviewed: YYYY-MM-DD
 ## 4 Solution strategy
 
 ## 5 Building blocks (delta)
+<!-- adoit-view: SOLUTION-BUILDING-BLOCKS-ID -->
+<!-- New and changed building blocks one level inside the affected systems, marked as new,
+     changed or temporary; unchanged neighbours only where they connect. -->
+| Building block | Change | Owner after return |
+|---|---|---|
 
 ## 6 Runtime
+<!-- adoit-view: RUNTIME-<SCENARIO>-ID -->
+<!-- One view per key scenario (UML sequence diagram allowed as exception): the main business
+     scenario, one error or fallback case, and every scenario named in the quality goals. -->
+<!-- Show the scenarios the change introduces or alters, including migration or cutover steps. -->
+
 ## 7 Deployment
 
 ## 8 Cross-cutting concepts (optional)

@@ -81,6 +81,45 @@ flowchart LR
 | Migration load | IF-10 | SYS-MIG | in | vendor migration API | BO-POL, BO-PRM (temporary) |
 
 ## 5 Building blocks: modules, configuration, extensions
+The vendor's internals are a black box; the view shows what Aurora licenses, configures and extends.
+
+<!-- adoit-view: SYS-NOVA-BUILDING-BLOCKS -->
+
+```mermaid
+flowchart LR
+  subgraph NOVA["SYS-NOVA NovaPolicy (vendor SaaS)"]
+    PD["Product designer"]:::app
+    RE["Rating engine"]:::app
+    PA["Policy administration"]:::app
+    BAPI["Broker API"]:::app
+    BILL["Billing module<br/>licensed, not used"]:::unused
+    CFG1["Motor product family<br/>3 products, 14 covers"]:::cfg
+    CFG2["Underwriting rules,<br/>renewal workflow"]:::cfg
+    EXT1["Swiss vehicle data lookup<br/>(Aurora plug-in)"]:::own
+    EXT2["Broker commission rules<br/>(Aurora rules extension)"]:::own
+  end
+  PD --> CFG1
+  RE --> CFG1
+  PA --> CFG2
+  RE --> EXT1
+  PA --> EXT2
+  BAPI --> RE
+  BAPI --> PA
+  IF06(["IF-06, IF-13"]):::ext --> BAPI
+  PA --> IF01(["IF-01"]):::ext
+  classDef app fill:#b5ffff,stroke:#2a7f8f,color:#000
+  classDef biz fill:#ffffb5,stroke:#a89a2b,color:#000
+  classDef tech fill:#c9e7b7,stroke:#4b7f3a,color:#000
+  classDef ext fill:#eeeeee,stroke:#888,color:#000
+  classDef temp fill:#ffffff,stroke:#888,stroke-dasharray:5 5,color:#000
+  classDef legacy fill:#dddddd,stroke:#777,color:#444
+  classDef new fill:#b5ffff,stroke:#1d6fa5,stroke-width:3px,color:#000
+  classDef own fill:#b5ffff,stroke:#7a3fb0,stroke-width:3px,color:#000
+  classDef cfg fill:#f3fbe9,stroke:#4b7f3a,color:#000
+  classDef unused fill:#f4f4f4,stroke:#aaaaaa,color:#888
+```
+
+
 ### 5.1 Licensed modules in use
 Product designer, rating engine, policy administration, broker API. Not used: billing.
 
@@ -118,6 +157,27 @@ sequenceDiagram
   PAD->>EIP: IF-03 canonical event policy.nonlife.v1
   Note over PAD: policy added to nightly claims feed IF-04
 ```
+
+Scenario "product manager changes a motor tariff":
+
+<!-- adoit-view: SYS-NOVA-RUNTIME-TARIFF -->
+
+```mermaid
+sequenceDiagram
+  participant PM as Product manager
+  participant T1 as Test tenant
+  participant GIT as Aurora Git (configuration export)
+  participant PRE as Pre-production tenant
+  participant PROD as Production tenant
+  PM->>T1: change tariff in product designer
+  PM->>T1: test with reference policies
+  T1->>GIT: weekly configuration export (versioned)
+  PM->>PRE: promote configuration
+  Note over PRE: regression of quote-and-bind, 2 days
+  PRE->>PROD: promote, effective next Monday
+  Note over PM,PROD: target: in production within 10 working days
+```
+
 
 ## 7 Deployment
 <!-- adoit-view: SYS-NOVA-DEPLOYMENT -->

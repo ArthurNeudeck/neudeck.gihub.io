@@ -47,7 +47,9 @@ last_reviewed: YYYY-MM-DD
 <!-- Including data classification (e.g. PII). -->
 
 ## 6 Runtime (optional)
-<!-- Key end-to-end processes, e.g. as BPMN, referenced from ADOIT. -->
+<!-- adoit-view: DOMAIN-RUNTIME-<SCENARIO>-ID -->
+<!-- Key end-to-end processes across the domain's DPs and its neighbours, as BPMN or as a sequence
+     of DPs, referenced from ADOIT. -->
 
 ## 8 Domain patterns
 | Pattern | Problem | Solution | Applies when | Origin (e.g. reused Solution Blueprint) |

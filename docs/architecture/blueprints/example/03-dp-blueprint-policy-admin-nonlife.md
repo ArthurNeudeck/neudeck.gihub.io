@@ -115,6 +115,29 @@ flowchart LR
 | BEST-NL | SYS-BEST | make | none (see FINDINGS F4) | phase-out, PL-3 |
 | Migration Factory Motor | SYS-MIG | make | only in SB-001 | temporary |
 
+## 6 Runtime
+Routing by line of business at PL-1: the same consumer interfaces are served from two systems of record.
+
+<!-- adoit-view: DP-PANL-RUNTIME-ROUTING -->
+
+```mermaid
+sequenceDiagram
+  participant NOVA as NovaPolicy
+  participant BEST as BEST-NL
+  participant PAD as Policy Adapter Layer
+  participant EIP as EIP event broker
+  participant CLM as SCHADEN-2000
+  NOVA->>PAD: IF-01 motor policy changed
+  PAD->>PAD: router: motor = NovaPolicy, accepted
+  BEST->>PAD: IF-02 household policy changed (CDC)
+  PAD->>PAD: router: household = BEST-NL, accepted
+  BEST->>PAD: IF-02 motor policy changed (residual write after cutover)
+  PAD->>PAD: router: motor ≠ BEST-NL, rejected, alert
+  PAD->>EIP: IF-03 canonical events for both accepted changes
+  PAD->>CLM: IF-04 both changes in the nightly feed
+```
+
+
 ## 8 Cross-cutting concepts and patterns
 - **Routing by LoB:** SYS-PAD holds a routing table LoB → system of record. Switching a LoB is
   a configuration change at cutover.

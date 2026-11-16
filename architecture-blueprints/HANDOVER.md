@@ -126,6 +126,15 @@ Published content lives under `docs/architecture/` (GitHub Pages serves `docs/`)
 - Method section 8 now has two subsections: demand-driven and standard-driven enhancements; minimum
   modelling depth for standards includes accepted equivalent control. New finding F14.
 
+### Views per level (2026-11-16)
+- Every required chapter 3, 5 and 6 contains at least one view; table "views per level" in method
+  section 2 and templates README; view slots added to Buy, Make, Solution, DP and Domain templates;
+  quality gate checks it.
+- Example now has building block views for NovaPolicy (modules, configuration, Aurora extensions),
+  SB-001 (migration factory), SB-005 (portal and changed PAD components), SB-007 (scanning service),
+  and runtime views for Domain PP, DP-PANL, NovaPolicy (tariff change), PAD (cutover switch), SB-005
+  (broker referral), SB-007 (nightly compensating scan). Legend classes added: own, cfg, unused.
+
 ### Parked
 - Zug 7: tool support. Evaluate Backstage (catalog Domain/System/Component/API, TechDocs on
   MkDocs, scorecards) plus custom plugins (ADOIT sync, triage, gate) against a custom build.

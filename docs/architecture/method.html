@@ -16,7 +16,7 @@
     <link rel="stylesheet" type="text/css" href="../assets/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="../assets/css/font-awesome.css">
     <link rel="stylesheet" href="../assets/css/templatemo-lava.css">
-    <link rel="stylesheet" href="assets/architecture.css?v=20">
+    <link rel="stylesheet" href="assets/architecture.css?v=22">
 </head>
 
 <body>
@@ -142,6 +142,33 @@
     treats the vendor's internals as a black box and documents what the organisation owns: licensed modules
     in use, configuration, extension points and their upgrade risk, hosting and release cycle. The
     <strong>Make</strong> profile documents components, runtime and deployment in classic arc42 depth.</p>
+
+<h3 id="views" data-toc="Views per level">Views every blueprint shows</h3>
+<p>Text alone does not make a target picture. Every required chapter 3, 5 and 6 contains at least one
+    view from the repository. The views zoom one level at a time: each shows the building blocks of its
+    own level and its direct neighbours, never the inside of a neighbour.</p>
+<table>
+    <thead><tr><th>Profile</th><th>Ch. 3 context view</th><th>Ch. 5 building block view</th><th>Ch. 6 runtime view</th></tr></thead>
+    <tbody>
+    <tr><td>Enterprise</td><td>enterprise and external parties</td><td>domains with their DPs and main flows</td><td>&ndash;</td></tr>
+    <tr><td>Domain</td><td>domain and neighbouring domains</td><td>DPs with their systems; business objects</td><td>end-to-end process across DPs (optional)</td></tr>
+    <tr><td>Digital Product</td><td>DP with its cross-DP interfaces</td><td>systems with lifecycle and internal interfaces</td><td>flows across the DP's systems (optional; required when more than two systems are involved)</td></tr>
+    <tr><td>System, Buy</td><td>system with its interfaces</td><td>licensed modules, configuration, own extensions; vendor internals stay a black box</td><td>key scenarios, including how a configuration change reaches production</td></tr>
+    <tr><td>System, Make</td><td>system with its interfaces</td><td>components (level 1), selected components in detail (level 2)</td><td>key scenarios, including at least one error case</td></tr>
+    <tr><td>Solution, full</td><td>delta: new, changed, temporary elements</td><td>new and changed building blocks inside the affected systems</td><td>scenarios the change introduces, including migration or cutover</td></tr>
+    </tbody>
+</table>
+<p>Runtime views are usually UML sequence diagrams (the one notation allowed besides ArchiMate); each
+    covers one scenario. Building block views name the interfaces by their IDs, so the context view of the
+    level below can be checked against them.</p>
+<div class="ab-callout ab-example">
+    <div class="ab-callout-title">Aurora</div>
+    <p>Compare the <a href="viewer.html?doc=example%2F04-system-blueprint-novapolicy.md">NovaPolicy</a> (Buy)
+        building block view, which shows modules, configuration and Aurora's plug-ins, with the
+        <a href="viewer.html?doc=example%2F05-system-blueprint-policy-adapter-layer.md">Policy Adapter Layer</a>
+        (Make) component view. <a href="viewer.html?doc=example%2F08-solution-blueprint-customer-portal.md">SB-005</a>
+        shows the delta view of a change: the new portal and the new components inside an existing system.</p>
+</div>
 
 <h2 id="model">3 Model first</h2>
 <p>Text and model have separate masters. Markdown in Git is the master for text and reasoning; the
@@ -296,7 +323,7 @@ flowchart TB
     <tr><td>Error</td><td>blocks merge and publication</td><td>deterministic rules; AI findings only after a human confirms them</td></tr>
     </tbody>
 </table>
-<p>Typical deterministic rules: required chapters of the profile present; front matter complete;
+<p>Typical deterministic rules: required chapters of the profile present; every required chapter 3, 5 and 6 contains a view; front matter complete;
     reviewer differs from responsible; every referenced ID exists in the model; chapter 2 lists all principles
     and standards that apply by system attributes; every <em>partly</em> or <em>no</em> has an ADR; every
     exception has an expiry date in the future and a deciding level allowed by the delegation matrix.</p>
@@ -447,10 +474,10 @@ flowchart TB
 <script src="../assets/js/custom.js"></script>
 <!-- Architecture pages -->
 <script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
-<script src="assets/docs.js?v=20"></script>
-<script src="assets/glossary.js?v=20"></script>
-<script src="assets/ids.js?v=20"></script>
-<script src="assets/architecture.js?v=20"></script>
+<script src="assets/docs.js?v=22"></script>
+<script src="assets/glossary.js?v=22"></script>
+<script src="assets/ids.js?v=22"></script>
+<script src="assets/architecture.js?v=22"></script>
 
 </body>
 </html>

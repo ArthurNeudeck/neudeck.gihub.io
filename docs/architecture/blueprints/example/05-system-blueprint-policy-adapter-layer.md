@@ -151,6 +151,28 @@ sequenceDiagram
   Note over LEG: added to nightly IF-04 and IF-05 files
 ```
 
+Scenario "cutover switch of a line of business" (PL-1, motor):
+
+<!-- adoit-view: SYS-PAD-RUNTIME-SWITCH -->
+
+```mermaid
+sequenceDiagram
+  participant OPS as Cutover team
+  participant RT as LoB router (config table)
+  participant BIN as BEST inbound adapter
+  participant NIN as Nova inbound adapter
+  participant DLQ as Dead-letter queue
+  OPS->>RT: Sunday after go: set motor = NovaPolicy
+  RT-->>OPS: configuration active, no deployment
+  NIN->>RT: motor event from NovaPolicy
+  RT-->>NIN: accepted
+  BIN->>RT: late motor event from BEST-NL
+  RT->>DLQ: rejected, wrong system of record
+  DLQ-->>OPS: alert, reconciliation checks the record
+  Note over OPS,RT: rollback until Sunday 18:00 = set motor = BEST-NL
+```
+
+
 ## 7 Deployment
 <!-- adoit-view: SYS-PAD-DEPLOYMENT -->
 
