@@ -18,6 +18,7 @@ Each finding has a proposal; none is applied to the templates yet.
 | F11 | **Domain pattern candidates need a status.** "LoB migration" is a pattern candidate before its second reuse. | Domain Blueprint chapter 8 | Pattern status: candidate, established, deprecated. |
 | F12 | **No check of strategic fit in the triage.** The customer portal served none of the strategic goals; nothing in the method forced this to surface before design started. | SB-005, ADR-ENT-004 | Triage question "Which strategic goal does this change serve?". No goal → escalate to enterprise chapter 1 before the Solution Blueprint is approved. |
 | F13 | **Plateaus of different programmes depend on each other.** PL-C1 needs PL-1, PL-C2 needs PL-2. | SB-005 chapter 13 | Model plateau dependencies across programmes in the repository; a delay of a prerequisite plateau shows up in every dependent roadmap. |
+| F14 | **Standards need an equivalence rule for provider-operated systems.** "Scan at the first point of entry" cannot be met by Aurora for files entering a SaaS user interface. | ADR-ENT-006, SB-007 | Standards get an optional attribute "accepted equivalent control" (what the provider must do and how it is evidenced); the STD-OUT-01 assessment checks it. Without it, every SaaS system would need a waiver. |
 
 ## Decisions
 

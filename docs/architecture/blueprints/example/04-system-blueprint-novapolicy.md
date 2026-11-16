@@ -13,7 +13,7 @@ version: 0.9
 accountable: "T. Brunner, DP Manager IT"
 responsible: "lead engineer PANL"
 reviewer: "L. Weber, solution architect DP-PANL"
-last_reviewed: 2026-11-05
+last_reviewed: 2026-11-16
 ---
 
 # System Blueprint – NovaPolicy (Buy)
@@ -42,6 +42,7 @@ Policy operations, product management, NovaSoft (vendor), EIP team, CISO.
 | STD-LOG-01 | SIEM within 15 min | production system | no → ADR-SYS-NOVA-002 (exception) |
 | STD-DAT-01 | PII in Switzerland | PII = yes | yes, CH region (ADR-SYS-NOVA-001) |
 | STD-OUT-01 | FINMA outsourcing | hosting = vendor SaaS | yes, assessment OA-2026-07 |
+| STD-SEC-01 | malware scanning at entry | receives files from outside (broker documents) | yes: files via IF-06 scanned at the EIP gateway; uploads in the vendor user interface scanned by NovaSoft (equivalent control, contract annex, evidence checked in OA-2026-07) |
 
 ## 3 Context
 <!-- adoit-view: SYS-NOVA-CONTEXT -->

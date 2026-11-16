@@ -6,7 +6,7 @@ adoit_id: DOM-PP
 parent_adoit_id: ENT-AUR
 domain: DOM-PP
 status: approved
-version: 2.1
+version: 2.2
 accountable: "Head of Product & Policy (business) / Head of IT Product & Policy"
 responsible: "N. Fischer, domain architect"
 reviewer: "U. Roth, domain architect DOM-CD/DOM-TP"
@@ -63,7 +63,7 @@ claims and collections as consumers of policy data.
 | EP-04 v2 | Product platform per LoB group | NovaPolicy product engine for non-life |
 | EP-05 | Privacy by design | policy and quote contain PII |
 | EP-06 | Canonical events | canonical policy format, see DPP-01 |
-| STD-API-01, STD-EVT-01, STD-DAT-01, STD-LOG-01, STD-OUT-01 | standards | relevance per system in DP and System Blueprints |
+| STD-API-01, STD-EVT-01, STD-DAT-01, STD-LOG-01, STD-OUT-01, STD-SEC-01 | standards | relevance per system in DP and System Blueprints; STD-SEC-01 (new): policy documents from brokers and customers enter only through the EIP gateway |
 
 ## 3 Context
 <!-- adoit-view: DOM-PP-CONTEXT -->

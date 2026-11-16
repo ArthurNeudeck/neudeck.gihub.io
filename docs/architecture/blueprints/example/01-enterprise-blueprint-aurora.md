@@ -5,7 +5,7 @@ title: "Enterprise Blueprint Aurora Versicherung AG"
 adoit_id: ENT-AUR
 parent_adoit_id: ""
 status: approved
-version: 3.3
+version: 3.4
 accountable: "Chief Architect"
 responsible: "Enterprise Architecture team"
 reviewer: "Architecture Board"
@@ -143,7 +143,8 @@ banks and payment providers, SaaS and outsourcing providers.
 | EP-06 | Events in canonical, versioned formats | decoupling of consumers | schema registry on EIP |
 
 ### 4.3 Standards
-Generated from ADOIT: STD-API-01, STD-EVT-01, STD-IAM-01, STD-LOG-01, STD-DAT-01, STD-OUT-01.
+Generated from ADOIT: STD-API-01, STD-EVT-01, STD-IAM-01, STD-IAM-02, STD-LOG-01, STD-DAT-01, STD-OUT-01, STD-SEC-01.
+STD-SEC-01 (malware scanning at the first point of entry, owner CISO) is new; see ADR-ENT-006.
 Relevance per system is derived from system attributes (see `00-adoit-model-extract.md`).
 
 ## 5 Building blocks: domains
@@ -201,6 +202,7 @@ flowchart TB
 |---|---|---|---|
 | Legacy-format feed | A domain replaces its core system, consumers in other domains cannot change in time | Adapter in the providing domain keeps delivering the old format from the new system | core replacement with stable consumers |
 | Canonical event publication | Consumers coupled to internal models of providers | Providers publish canonical events on EIP | any cross-domain data flow |
+| Scan at entry | Files from outside spread to every system that processes them | Files enter through the mail or EIP gateway, which call the central scanning service; SaaS providers scan with evidence (STD-SEC-01) | any system that receives files from outside |
 
 ## 9 Decisions
 | ADR | Title | Type | Status | Date |
@@ -210,6 +212,7 @@ flowchart TB
 | ADR-ENT-003 | Integrated product engine of NovaPolicy instead of central product platform | waiver | accepted, principle changed | 2026-04-02 |
 | ADR-ENT-004 | Direct digital channel for private customers, with broker-of-record protection | decision | accepted | 2026-11-16 |
 | ADR-ENT-005 | Customer identity as a central platform service (CIAM) | decision | accepted | 2026-11-16 |
+| ADR-ENT-006 | Malware scanning at the first point of entry; provider scanning accepted as equivalent for SaaS | decision | accepted | 2026-11-16 |
 
 ## 10 Quality requirements
 | Quality goal | Target |
@@ -223,6 +226,7 @@ flowchart TB
 |---|---|---|---|---|---|
 | EXC-ENT-002 | exception | dual system of record policy (ADR-ENT-002) | DP Manager IT DP-PANL | PL-3, Q2 2029 | TD-PANL-001 |
 | EXC-PANL-001 | exception | NovaPolicy audit logs daily instead of 15 min (ADR-SYS-NOVA-002) | DP Manager IT DP-PANL | 2028-06-30 | TD-PANL-004 |
+| EXC-PANL-002 | exception | BEST-NL broker inbox without malware scanning at entry (ADR-SYS-BEST-001), decided by the CISO | DP Manager IT DP-PANL | 2029-06-30 | TD-PANL-005 |
 | R-ENT-01 | risk | migration of 3 LoB within 2 years binds key staff in DOM-PP, DOM-CL, DOM-FC | programme lead | – | – |
 | R-ENT-02 | risk | brokers perceive the customer portal as competition (ADR-ENT-004) | Head of Distribution | broker information before PL-C1 | – |
 
@@ -251,6 +255,8 @@ flowchart LR
   PLC1 --> PLC2
   PL1 -.->|prerequisite| PLC1
   PL2 -.->|prerequisite| PLC2
+  PLS1["PL-S1 Q3 2027<br/>malware scanning<br/>at entry (new)"]:::new
+  PLS1 -.->|"in place before"| PL1
   classDef app fill:#b5ffff,stroke:#2a7f8f,color:#000
   classDef biz fill:#ffffb5,stroke:#a89a2b,color:#000
   classDef tech fill:#c9e7b7,stroke:#4b7f3a,color:#000
@@ -265,6 +271,7 @@ flowchart LR
 
 | Plateau | Target date | Content | Initiatives |
 |---|---|---|---|
+| PL-S1 | Q3 2027 | Malware scanning at every point of entry (STD-SEC-01) | Malware Scanning at Entry (new, SB-007) |
 | PL-1 | Q4 2027 | Motor on NovaPolicy | Core Replacement Non-Life |
 | PL-2 | Q4 2028 | All non-life on NovaPolicy | Core Replacement Non-Life |
 | PL-3 | Q2 2029 | BEST-NL decommissioned | Core Replacement Non-Life |

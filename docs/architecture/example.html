@@ -16,7 +16,7 @@
     <link rel="stylesheet" type="text/css" href="../assets/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="../assets/css/font-awesome.css">
     <link rel="stylesheet" href="../assets/css/templatemo-lava.css">
-    <link rel="stylesheet" href="assets/architecture.css?v=18">
+    <link rel="stylesheet" href="assets/architecture.css?v=20">
 </head>
 
 <body>
@@ -106,8 +106,10 @@
         <span>SB-004: a complete deviation on one page, already returned.</span></a>
     <a class="ab-card" href="viewer.html?doc=example/08-solution-blueprint-customer-portal.md"><strong>08 Enhancement: customer portal</strong>
         <span>SB-005: how a new demand extends the target pictures on every level.</span></a>
+    <a class="ab-card" href="viewer.html?doc=example/09-solution-blueprint-malware-scanning.md"><strong>09 Enhancement: malware scanning</strong>
+        <span>SB-007: a new standard rolled out to every system it applies to.</span></a>
     <a class="ab-card" href="viewer.html?doc=example/adr/ADR-ENT-001.md"><strong>Decisions (ADRs)</strong>
-        <span>Thirteen ADRs: decisions, two exceptions and a waiver, on every level.</span></a>
+        <span>Fifteen ADRs: decisions, three exceptions and a waiver, on every level.</span></a>
 </div>
 
 <h2 id="scenario">The scenario</h2>
@@ -177,6 +179,7 @@ flowchart LR
     <tr><td><a href="viewer.html?doc=example/06-solution-blueprint-p1-motor-migration.md">06 Solution Blueprint SB-001</a></td><td>solution, full</td><td>delta description, temporary migration factory, return checklist still open</td></tr>
     <tr><td><a href="viewer.html?doc=example/07-solution-blueprint-novapolicy-siem-logging.md">07 Solution Blueprint SB-004</a></td><td>solution, light</td><td>a complete deviation on one page, already returned</td></tr>
     <tr><td><a href="viewer.html?doc=example/08-solution-blueprint-customer-portal.md">08 Solution Blueprint SB-005</a></td><td>solution, full</td><td>the enhancement: customer portal, decisions owned at their levels, return still open</td></tr>
+    <tr><td><a href="viewer.html?doc=example/09-solution-blueprint-malware-scanning.md">09 Solution Blueprint SB-007</a></td><td>solution, full</td><td>enhancement driven by a standard: compliance overview, provider evidence, an exception found during rollout</td></tr>
     </tbody>
 </table>
 
@@ -237,7 +240,7 @@ flowchart LR
     <li>SB-002 for PL-2 will reuse SB-001; at that point "LoB migration" becomes an established domain pattern.</li>
 </ol>
 
-<h2 id="enhancement">Enhancement: a customer portal</h2>
+<h2 id="enhancement">Enhancement 1: a customer portal</h2>
 <p>In November 2026, a new demand arrives: private customers want to see their policies online and buy
     simple products without an intermediary. This section shows how the existing target pictures are
     extended, following the <a href="method.html#enhance">enhancement steps of the method</a>.</p>
@@ -305,6 +308,61 @@ flowchart LR
     programmes depend on each other without the method saying how to model that (F13). Both are in the
     <a href="viewer.html?doc=example/FINDINGS.md">findings</a> with proposals.</p>
 
+<h2 id="enhancement-scan">Enhancement 2: malware scanning at entry</h2>
+<p>The second enhancement does not come from a business demand but from a rule: every file from outside
+    is to be scanned for malware the very first time it enters Aurora, whether in Aurora's own systems or
+    in a SaaS system. It follows the <a href="method.html#enhance-standard">standard-driven enhancement
+    steps</a>.</p>
+
+<h3 id="scan-standard" data-toc="The standard and its equivalence rule">1 The standard and its equivalence rule</h3>
+<p><a href="viewer.html?doc=example/adr/ADR-ENT-006.md">ADR-ENT-006</a> creates standard STD-SEC-01, owned by
+    the CISO and anchored at enterprise level, applicable to every system that receives files from outside.
+    The hard part is SaaS: files uploaded in NovaPolicy's user interface land at the vendor before Aurora
+    can see them. Routing those uploads through an Aurora gateway is impossible, so the standard accepts
+    the provider's scanning as an <em>equivalent control</em>, if it is in the contract and evidenced in
+    the outsourcing assessment (STD-OUT-01). Without this rule, the standard would have needed a waiver
+    for every SaaS system on day one.</p>
+
+<h3 id="scan-overview" data-toc="Compliance overview">2 The compliance overview is the rollout plan</h3>
+<p>The applicability rule, evaluated on the model, selects the affected systems. Chapter 2.1 of
+    <a href="viewer.html?doc=example/09-solution-blueprint-malware-scanning.md">SB-007</a> lists them with a
+    verdict:</p>
+<table>
+    <thead><tr><th>System</th><th>How STD-SEC-01 is met</th><th>Verdict</th></tr></thead>
+    <tbody>
+    <tr><td>SYS-MGW Mail Gateway</td><td>already scans attachments</td><td>yes</td></tr>
+    <tr><td>SYS-EIP Integration Platform</td><td>calls the new scanning service SYS-SCAN for every file (IF-17)</td><td>yes from PL-S1</td></tr>
+    <tr><td>SYS-NOVA NovaPolicy</td><td>API uploads scanned at the EIP gateway, user interface uploads by the provider, evidenced</td><td>yes, by provider</td></tr>
+    <tr><td>SYS-CSP Customer Portal</td><td>future uploads only through the EIP gateway</td><td>yes by design</td></tr>
+    <tr><td>SYS-BEST BEST-NL</td><td>SFTP inbox for twelve brokers, never modelled before (now IF-18)</td><td>no &rarr; exception</td></tr>
+    </tbody>
+</table>
+
+<h3 id="scan-exception" data-toc="An exception and the delegation matrix">3 An exception, decided by the delegation matrix</h3>
+<p>The rollout found an entry point the model did not know. Fixing it would mean investing in a system that
+    is switched off in 2029. <a href="viewer.html?doc=example/adr/ADR-SYS-BEST-001.md">ADR-SYS-BEST-001</a>
+    accepts the gap until PL-3 with a nightly scan before import as compensating control. Under the
+    <a href="method.html#authority">delegation matrix</a>, about 30 months and confidential data are above
+    every delegated limit, so the CISO decides, not the DP. Because BEST-NL has no System Blueprint, the
+    exception lives in the DP Blueprint, which makes finding F4 concrete.</p>
+
+<h3 id="scan-now" data-toc="What changed">4 What changed in the living blueprints</h3>
+<ul>
+    <li><a href="viewer.html?doc=example/01-enterprise-blueprint-aurora.md">Enterprise Blueprint</a> version
+        3.4: STD-SEC-01 in the standards (ch. 4.3), pattern "Scan at entry" (ch. 8), ADR-ENT-006 (ch. 9),
+        EXC-PANL-002 (ch. 11), PL-S1 in the roadmap (ch. 13).</li>
+    <li><a href="viewer.html?doc=example/02-domain-blueprint-product-policy.md">Domain Blueprint Product &amp;
+        Policy</a> version 2.2: interpretation of STD-SEC-01 for the domain (ch. 2).</li>
+    <li><a href="viewer.html?doc=example/03-dp-blueprint-policy-admin-nonlife.md">DP Blueprint Policy
+        Administration Non-Life</a> version 1.6: STD-SEC-01 inherited (ch. 2), IF-18 in the context (ch. 3),
+        ADR-SYS-BEST-001 (ch. 9), EXC-PANL-002 (ch. 11).</li>
+    <li><a href="viewer.html?doc=example/04-system-blueprint-novapolicy.md">System Blueprint NovaPolicy</a>:
+        STD-SEC-01 row in the compliance table, met by the EIP gateway and by the provider (ch. 2).</li>
+    <li><a href="viewer.html?doc=example/00-adoit-model-extract.md">Model</a>: STD-SEC-01, SYS-SCAN, SYS-MGW,
+        IF-17, IF-18, programme "Malware Scanning at Entry" with plateau PL-S1.</li>
+</ul>
+<p>Finding F14 proposes to make the equivalence rule a standard attribute of every standard.</p>
+
 <h2 id="reading">Reading paths by role</h2>
 <table>
     <thead><tr><th>Role</th><th>Read</th></tr></thead>
@@ -347,10 +405,10 @@ flowchart LR
 <script src="../assets/js/custom.js"></script>
 <!-- Architecture pages -->
 <script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
-<script src="assets/docs.js?v=18"></script>
-<script src="assets/glossary.js?v=18"></script>
-<script src="assets/ids.js?v=18"></script>
-<script src="assets/architecture.js?v=18"></script>
+<script src="assets/docs.js?v=20"></script>
+<script src="assets/glossary.js?v=20"></script>
+<script src="assets/ids.js?v=20"></script>
+<script src="assets/architecture.js?v=20"></script>
 
 </body>
 </html>

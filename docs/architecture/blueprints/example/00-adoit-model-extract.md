@@ -54,6 +54,8 @@ Enterprise architecture: Architecture Board, chaired by the chief architect.
 | SYS-SIEM | Aurora SIEM | SIEM | DP-SEC | buy | target | Aurora private cloud | yes |
 | SYS-ARC | Aurora Archive | Archiv | DP-INT | buy | target | Aurora private cloud | yes |
 | SYS-CSP | Customer Portal | MyAurora, Kundenportal | DP-CSP | make | planned (PL-C1) | Aurora private cloud | yes |
+| SYS-SCAN | Aurora Malware Scanning Service | Scanner, AV-Service | DP-SEC | buy | planned (PL-S1) | Aurora private cloud | transit only |
+| SYS-MGW | Aurora Mail Gateway | Mailgateway | DP-SEC | buy | target | Aurora private cloud | transit only |
 | SYS-CIAM | Aurora Customer Identity | CIAM, customer login | DP-SEC | buy | planned (PL-C1) | vendor SaaS (CH region) | yes |
 
 ## Interfaces
@@ -75,6 +77,8 @@ Enterprise architecture: Architecture Board, chaired by the chief architect.
 | IF-14 | SYS-CSP | SYS-PRT | customer data API via EIP gateway | BO-PRT | planned (PL-C1) |
 | IF-15 | SYS-CSP | SYS-CIAM | customer login (OIDC) | BO-PRT | planned (PL-C1) |
 | IF-16 | SYS-CSP | SYS-BRP | quote requests of brokered customers routed to their broker | BO-QTE | planned (PL-C1) |
+| IF-17 | SYS-EIP | SYS-SCAN | scan request for every file arriving through the EIP gateway | – | planned (PL-S1) |
+| IF-18 | brokers (external) | SYS-BEST | broker document inbox (SFTP), found during the STD-SEC-01 rollout | BO-POL | until PL-3 |
 
 ## Business objects
 | ID | Business object | Classification | PII | System of record |
@@ -108,6 +112,7 @@ Enterprise architecture: Architecture Board, chaired by the chief architect.
 | STD-LOG-01 | Security-relevant logs to SIEM within 15 minutes | any production system |
 | STD-DAT-01 | PII stored and processed in Switzerland | PII = yes |
 | STD-OUT-01 | FINMA outsourcing assessment and contract clauses | hosting = vendor SaaS or vendor-hosted |
+| STD-SEC-01 | Files from outside are scanned for malware at their first point of entry under Aurora's control, or by the provider with an equivalent, contractually agreed and evidenced control (new, ADR-ENT-006; owner CISO) | receives files from outside |
 
 ## Plateaus and work packages (programme view "Core Replacement Non-Life")
 | ID | Plateau | Target date | Content |
@@ -139,3 +144,13 @@ line of business needs that line on NovaPolicy.
 | WP-6 | Customer portal and customer identity | PL-C1 | SB-005 |
 | WP-7 | Policy query API and read store in SYS-PAD | PL-C1 | SB-005 |
 | WP-8 | Online bind for household and liability | PL-C2 | SB-006 (planned) |
+
+## Plateaus and work packages (programme view "Malware Scanning at Entry", added 2026-11)
+| ID | Plateau | Target date | Content | Depends on |
+|---|---|---|---|---|
+| PL-S1 | Scanning at entry | Q3 2027 | SYS-SCAN live, all files through the EIP gateway scanned, provider evidence for all SaaS systems, exceptions registered | – |
+
+| ID | Work package | Delivers | Solution Blueprint |
+|---|---|---|---|
+| WP-9 | Scanning service and EIP gateway integration | PL-S1 | SB-007 |
+| WP-10 | Provider evidence for SaaS systems (NovaSoft, CIAM vendor) | PL-S1 | SB-007 |

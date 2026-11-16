@@ -10,6 +10,12 @@ policies and, without a broker, buy online. It shows how a new demand extends ex
 pictures: a new strategic goal SG-5 and channel decision ADR-ENT-004 at enterprise level, a policy
 query API decided in the policy domain (ADR-DOM-002), and the Solution Blueprint SB-005.
 
+**Enhancement driven by a standard (November 2026):** every file from outside must be scanned for
+malware at its first point of entry. The new standard STD-SEC-01 (ADR-ENT-006, owner CISO) accepts
+the SaaS provider's scanning as equivalent if it is contracted and evidenced. The rollout in SB-007
+derives the affected systems from the model, finds an unmodelled entry point into BEST-NL and
+turns it into an exception decided by the CISO (ADR-SYS-BEST-001).
+
 ## Files
 
 | File | Level / type | Profile |
@@ -23,6 +29,7 @@ query API decided in the policy domain (ADR-DOM-002), and the Solution Blueprint
 | `06-solution-blueprint-p1-motor-migration.md` | Initiative, plateau 1 | solution-full |
 | `07-solution-blueprint-novapolicy-siem-logging.md` | Deviation | solution-light |
 | `08-solution-blueprint-customer-portal.md` | Enhancement: customer portal, plateau C1 | solution-full |
+| `09-solution-blueprint-malware-scanning.md` | Enhancement: malware scanning at entry, plateau S1 | solution-full |
 | `adr/` | decisions, exceptions, waiver | – |
 | `FINDINGS.md` | gaps and errors in the method found while writing the example | – |
 
