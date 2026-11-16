@@ -16,7 +16,7 @@
     <link rel="stylesheet" type="text/css" href="../assets/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="../assets/css/font-awesome.css">
     <link rel="stylesheet" href="../assets/css/templatemo-lava.css">
-    <link rel="stylesheet" href="assets/architecture.css?v=17">
+    <link rel="stylesheet" href="assets/architecture.css?v=18">
 </head>
 
 <body>
@@ -304,7 +304,63 @@ flowchart TB
     example, a system mentioned by alias but missing from the context chapter, or a claim that contradicts a
     principle. An error is overridden only by the owner of the violated rule, via ADR.</p>
 
-<h2 id="roles">8 Roles and ownership</h2>
+<h2 id="enhance">8 Enhancing the target pictures</h2>
+<p>Target pictures are never finished. New demands arrive that the current blueprints do not cover:
+    a new channel, a new product, a regulation. The method handles them with the same building blocks
+    as any other change, but one rule matters more than usual: <strong>each decision is recorded at
+    its own level as soon as it is taken</strong>, while everything that depends on implementation
+    returns later.</p>
+<div class="mermaid">
+flowchart TB
+  D[New demand] --> T{Triage<br/>incl. strategic fit}
+  T -->|"no strategic goal covers it"| E["Enterprise level:<br/>new or changed goal + ADR"]
+  T -->|"goal exists"| P
+  E --> P["Place each decision at its level:<br/>enterprise, domain, DP, system"]
+  P --> M["Model new objects in the repository<br/>with lifecycle 'planned'"]
+  M --> R["Plan plateaus, incl. dependencies<br/>on other programmes"]
+  R --> S["Solution Blueprint per plateau<br/>(the delta)"]
+  S --> I[Implementation]
+  I --> RET["Return: remaining blueprints updated,<br/>'planned' becomes 'target'"]
+</div>
+<ol>
+    <li><strong>Triage, including strategic fit.</strong> Which strategic goal does the demand serve? If
+        none does, the demand is not rejected but escalated: the enterprise level decides whether the
+        strategy changes. (Making this a fixed triage question is open point F12 in the
+        <a href="viewer.html?doc=example%2FFINDINGS.md">findings</a>.)</li>
+    <li><strong>Strategy first.</strong> A new or changed goal goes into chapter 1 of the Enterprise
+        Blueprint, the reasoning into an enterprise ADR, and the capability heatmap is recoloured.</li>
+    <li><strong>Decisions at their level, immediately.</strong> Every decision the demand forces is placed by
+        the usual rule (lowest level covering all parties; deviations by the owner of the rule) and stored
+        in that level's blueprint right away. The Solution Blueprint lists these ADRs but does not own
+        them.</li>
+    <li><strong>Model the planned state.</strong> New systems, interfaces and attributes are created in the
+        repository with lifecycle <em>planned</em>. That lets roadmaps (chapter 13) and context views show
+        the coming target picture before anything is built.</li>
+    <li><strong>Plateaus and dependencies.</strong> The enhancement gets its own plateaus. If they depend on
+        another programme's plateaus, the dependency is shown in every affected roadmap.</li>
+    <li><strong>Solution Blueprint for the delta</strong>, one per plateau, with the return checklist naming
+        every living blueprint that still has to change.</li>
+    <li><strong>Return.</strong> After implementation, DP and System Blueprints are written or updated, the
+        remaining ADRs move to their owners, and <em>planned</em> becomes <em>target</em> in the model.</li>
+</ol>
+<table>
+    <thead><tr><th>Changes immediately, with the decision</th><th>Changes on return, after implementation</th></tr></thead>
+    <tbody>
+    <tr><td>strategic goals and heatmap (Enterprise ch. 1)</td><td>new DP Blueprints and System Blueprints</td></tr>
+    <tr><td>enterprise and domain ADRs (ch. 9 of their blueprints)</td><td>building blocks and context of existing System Blueprints (ch. 3, 5)</td></tr>
+    <tr><td>architecture strategy and principles, if affected (ch. 4)</td><td>DP context with new cross-DP interfaces (ch. 3)</td></tr>
+    <tr><td>roadmaps with the new plateaus (ch. 13), risks (ch. 11)</td><td>ADRs of the change's own level</td></tr>
+    <tr><td>new model objects with lifecycle <em>planned</em></td><td>lifecycle <em>planned</em> &rarr; <em>target</em></td></tr>
+    </tbody>
+</table>
+<div class="ab-callout ab-example">
+    <div class="ab-callout-title">Worked example</div>
+    <p>Aurora adds a <a href="example.html#enhancement">customer portal</a>: a new goal SG-5 and channel
+        decision ADR-ENT-004 at enterprise level, a customer identity platform (ADR-ENT-005), a policy query
+        API decided in the policy domain (ADR-DOM-002), and Solution Blueprint SB-005 for the delta.</p>
+</div>
+
+<h2 id="roles">9 Roles and ownership</h2>
 <table>
     <thead><tr><th>Role</th><th>Accountable for</th></tr></thead>
     <tbody>
@@ -345,10 +401,10 @@ flowchart TB
 <script src="../assets/js/custom.js"></script>
 <!-- Architecture pages -->
 <script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
-<script src="assets/docs.js?v=17"></script>
-<script src="assets/glossary.js?v=17"></script>
-<script src="assets/ids.js?v=17"></script>
-<script src="assets/architecture.js?v=17"></script>
+<script src="assets/docs.js?v=18"></script>
+<script src="assets/glossary.js?v=18"></script>
+<script src="assets/ids.js?v=18"></script>
+<script src="assets/architecture.js?v=18"></script>
 
 </body>
 </html>

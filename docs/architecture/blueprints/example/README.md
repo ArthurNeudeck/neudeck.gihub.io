@@ -5,6 +5,11 @@ system for non-life (BEST-NL) by the standard package NovaPolicy (fictional vend
 migrated line of business by line of business. Claims and Collections stay on their legacy
 systems for now and are connected via the Policy Adapter Layer.
 
+**Enhancement (November 2026):** a customer portal is added, in which private customers see their
+policies and, without a broker, buy online. It shows how a new demand extends existing target
+pictures: a new strategic goal SG-5 and channel decision ADR-ENT-004 at enterprise level, a policy
+query API decided in the policy domain (ADR-DOM-002), and the Solution Blueprint SB-005.
+
 ## Files
 
 | File | Level / type | Profile |
@@ -17,6 +22,7 @@ systems for now and are connected via the Policy Adapter Layer.
 | `05-system-blueprint-policy-adapter-layer.md` | System Policy Adapter Layer | make |
 | `06-solution-blueprint-p1-motor-migration.md` | Initiative, plateau 1 | solution-full |
 | `07-solution-blueprint-novapolicy-siem-logging.md` | Deviation | solution-light |
+| `08-solution-blueprint-customer-portal.md` | Enhancement: customer portal, plateau C1 | solution-full |
 | `adr/` | decisions, exceptions, waiver | – |
 | `FINDINGS.md` | gaps and errors in the method found while writing the example | – |
 

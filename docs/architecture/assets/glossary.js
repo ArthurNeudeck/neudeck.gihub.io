@@ -17,6 +17,8 @@
       text: 'A technique that streams changes from a database to other systems as they happen.' },
     { kind: 'abbr', term: 'CH', full: 'Switzerland (Confoederatio Helvetica)',
       text: 'Country code of Switzerland, used e.g. for "Swiss region" hosting.' },
+    { kind: 'abbr', term: 'CIAM', full: 'Customer Identity and Access Management', match: ['CIAM'],
+      text: 'Identity management for customers rather than employees: self-registration, login, multi-factor authentication and consent. In the example a central platform service (ADR-ENT-005).' },
     { kind: 'abbr', term: 'CIO', full: 'Chief Information Officer', match: ['CIO'],
       text: 'Executive responsible for information technology.' },
     { kind: 'abbr', term: 'CISO', full: 'Chief Information Security Officer', match: ['CISO'],
@@ -153,7 +155,7 @@
     ['ENT-', 'enterprise (ENT-AUR = Aurora)'], ['SG-', 'strategic goal'], ['CAP-', 'capability'],
     ['DOM-', 'domain'], ['DP-', 'digital product'], ['SYS-', 'system'], ['IF-', 'interface'],
     ['BO-', 'business object'], ['EP-', 'enterprise principle'], ['DPP-', 'domain principle of Product & Policy'],
-    ['STD-', 'standard'], ['REG-', 'regulatory constraint'], ['PL-', 'plateau'], ['WP-', 'work package'],
+    ['STD-', 'standard'], ['REG-', 'regulatory constraint'], ['PL-', 'plateau (PL-C1, PL-C2: programme Customer Self-Service)'], ['WP-', 'work package'],
     ['SB-', 'Solution Blueprint'], ['ADR-ENT-, ADR-DOM-, ADR-DP-, ADR-SYS-, ADR-SOL-', 'decision record of the enterprise, domain, DP, system or solution level'],
     ['EXC-', 'registered exception'], ['TD-', 'technical debt ticket'], ['R-', 'risk'],
     ['OA-', 'outsourcing assessment'], ['PF-', 'portfolio (investment) decision']

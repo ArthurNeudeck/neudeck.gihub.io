@@ -104,6 +104,18 @@ Published content lives under `docs/architecture/` (GitHub Pages serves `docs/`)
   proposed), responsibility delegable to solution architects / lead engineers, a solution
   architect assigned per DP reviews; reviewer never the author.
 
+### Example enhancement: customer portal (decided 2026-11-16)
+- New strategic goal SG-5 (digital self-service and direct sales for private customers) and
+  ADR-ENT-004 (direct channel with broker-of-record protection), as recommended.
+- Further decisions forced by the portal: ADR-ENT-005 (CIAM platform, new standard STD-IAM-02),
+  ADR-DOM-002 (policy query API on SYS-PAD with read store), ADR-SOL-005-01 (portal as make).
+- SB-005 (full, initiative, plateau PL-C1) holds the delta; return still open. Living blueprints
+  updated right away: Enterprise 3.3, Domain PP 2.1, DP-PANL 1.5 (roadmaps), model extract.
+- Method page section 8 "Enhancing the target pictures" and Example page section "Enhancement"
+  describe the pattern: decisions owned at their level immediately, rest on return, new objects
+  modelled as "planned".
+- New findings F12 (strategic fit in triage) and F13 (plateau dependencies across programmes).
+
 ### Parked
 - Zug 7: tool support. Evaluate Backstage (catalog Domain/System/Component/API, TechDocs on
   MkDocs, scorecards) plus custom plugins (ADOIT sync, triage, gate) against a custom build.

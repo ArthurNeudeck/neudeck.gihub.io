@@ -16,6 +16,8 @@ Each finding has a proposal; none is applied to the templates yet.
 | F9 | **The programme view is hard to read without an artefact.** We needed the model extract to make the example understandable. | 00-adoit-model-extract.md | Generate a programme view report from ADOIT (plateaus, work packages, Solution Blueprints, open exceptions); no hand-written document. |
 | F10 | **Decisions taken during a Solution Blueprint at a higher level.** ADR-ENT-001 to 003 were decided while writing SB-001, but belong to the Enterprise Blueprint from the start. | SB-001 chapter 9 | Clarify: the Solution Blueprint lists such ADRs, but they are owned by their target level immediately; only ADRs of the change's own level move on return. |
 | F11 | **Domain pattern candidates need a status.** "LoB migration" is a pattern candidate before its second reuse. | Domain Blueprint chapter 8 | Pattern status: candidate, established, deprecated. |
+| F12 | **No check of strategic fit in the triage.** The customer portal served none of the strategic goals; nothing in the method forced this to surface before design started. | SB-005, ADR-ENT-004 | Triage question "Which strategic goal does this change serve?". No goal → escalate to enterprise chapter 1 before the Solution Blueprint is approved. |
+| F13 | **Plateaus of different programmes depend on each other.** PL-C1 needs PL-1, PL-C2 needs PL-2. | SB-005 chapter 13 | Model plateau dependencies across programmes in the repository; a delay of a prerequisite plateau shows up in every dependent roadmap. |
 
 ## Decisions
 

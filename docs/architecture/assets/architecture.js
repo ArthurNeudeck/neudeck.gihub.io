@@ -59,7 +59,8 @@
   var CLASSES = [
     ['biz', '#ffffb5', '#a89a2b', 'Business: goal, domain, digital product, business object'],
     ['app', '#b5ffff', '#2a7f8f', 'Application: system or component'],
-    ['new', '#b5ffff', '#1d6fa5', 'Application, new with this change (thick border)'],
+    ['new', '#b5ffff', '#1d6fa5', 'Application or plateau, new with this change or enhancement (thick border)'],
+    ['newbiz', '#ffffb5', '#a89a2b', 'Business element, new with this enhancement (thick border)'],
     ['tech', '#c9e7b7', '#4b7f3a', 'Technology: platform, infrastructure, environment'],
     ['legacy', '#dddddd', '#777777', 'Legacy or phase-out'],
     ['temp', '#ffffff', '#888888', 'Temporary or not yet approved (dashed border)'],
@@ -89,7 +90,7 @@
     } else {
       CLASSES.forEach(function (c) {
         if (new RegExp(':::' + c[0] + '\\b').test(src)) {
-          items.push(swatch(c[1], c[2], c[0] === 'temp', c[0] === 'new') + ' ' + c[3]);
+          items.push(swatch(c[1], c[2], c[0] === 'temp', /^new/.test(c[0])) + ' ' + c[3]);
         }
       });
       var heat = HEAT.filter(function (h) {

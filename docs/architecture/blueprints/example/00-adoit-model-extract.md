@@ -9,6 +9,7 @@ In reality this content lives in ADOIT. All blueprints reference these IDs.
 | SG-2 | Reduce run cost of non-life policy administration by 30 % by 2030 |
 | SG-3 | Straight-through quote-and-bind for at least 70 % of motor broker business |
 | SG-4 | Operational resilience in line with FINMA Circular 2023/1 |
+| SG-5 | Digital self-service and direct sales for private customers: 40 % of private-customer service requests self-service by 2029, motor bought online by customers without a broker (added 2026-11, ADR-ENT-004) |
 
 ## Capabilities (ACORD-inspired) with heatmap
 | ID | Capability | Heat | Linked goals |
@@ -18,14 +19,15 @@ In reality this content lives in ADOIT. All blueprints reference these IDs.
 | CAP-03 | Policy administration | red | SG-1, SG-2, SG-3 |
 | CAP-04 | Claims management | amber | SG-2 |
 | CAP-05 | Billing and collections | amber | SG-2 |
-| CAP-06 | Distribution management | amber | SG-3 |
-| CAP-07 | Customer and partner management | green | – |
+| CAP-06 | Distribution management | amber | SG-3, SG-5 |
+| CAP-07 | Customer and partner management | amber (was green until SG-5) | SG-5 |
 
 ## Domains and digital products
 | Domain | DP | DP Manager Business | DP Manager IT | Solution architect |
 |---|---|---|---|---|
 | DOM-CD Customer & Distribution | DP-BRK Broker Portal | B. Keller | M. Rossi | S. Frei |
 | DOM-CD | DP-CRM Partner Management | B. Keller | M. Rossi | S. Frei |
+| DOM-CD | DP-CSP Customer Self-Service (planned, SB-005) | F. Bucher | M. Rossi | S. Frei |
 | DOM-PP Product & Policy | DP-PANL Policy Administration Non-Life | A. Meier | T. Brunner | L. Weber |
 | DOM-PP | DP-PAL Policy Administration Life | C. Huber | T. Brunner | L. Weber |
 | DOM-CL Claims | DP-CLH Claims Handling | D. Graf | P. Schmid | R. Baumann |
@@ -51,6 +53,8 @@ Enterprise architecture: Architecture Board, chaired by the chief architect.
 | SYS-IAM | Aurora IAM | SSO | DP-SEC | buy | target | Aurora private cloud | yes |
 | SYS-SIEM | Aurora SIEM | SIEM | DP-SEC | buy | target | Aurora private cloud | yes |
 | SYS-ARC | Aurora Archive | Archiv | DP-INT | buy | target | Aurora private cloud | yes |
+| SYS-CSP | Customer Portal | MyAurora, Kundenportal | DP-CSP | make | planned (PL-C1) | Aurora private cloud | yes |
+| SYS-CIAM | Aurora Customer Identity | CIAM, customer login | DP-SEC | buy | planned (PL-C1) | vendor SaaS (CH region) | yes |
 
 ## Interfaces
 | ID | From | To | Type | Business objects | Lifecycle |
@@ -66,13 +70,18 @@ Enterprise architecture: Architecture Board, chaired by the chief architect.
 | IF-09 | SYS-BEST | SYS-MIG | bulk extract | BO-POL, BO-PRT, BO-PRM | temporary |
 | IF-10 | SYS-MIG | SYS-NOVA | bulk load via vendor migration API | BO-POL, BO-PRM | temporary |
 | IF-11 | SYS-BEST | SYS-ARC | final archive export | BO-POL, BO-PRM | PL-3 only |
+| IF-12 | SYS-CSP | SYS-PAD | policy query API via EIP gateway (canonical format) | BO-POL, BO-PRM | planned (PL-C1) |
+| IF-13 | SYS-CSP | SYS-NOVA | quote-and-bind API via EIP gateway (same API as IF-06) | BO-QTE, BO-POL | planned (PL-C1) |
+| IF-14 | SYS-CSP | SYS-PRT | customer data API via EIP gateway | BO-PRT | planned (PL-C1) |
+| IF-15 | SYS-CSP | SYS-CIAM | customer login (OIDC) | BO-PRT | planned (PL-C1) |
+| IF-16 | SYS-CSP | SYS-BRP | quote requests of brokered customers routed to their broker | BO-QTE | planned (PL-C1) |
 
 ## Business objects
 | ID | Business object | Classification | PII | System of record |
 |---|---|---|---|---|
 | BO-POL | Policy | confidential | yes | SYS-BEST (all LoB) → SYS-NOVA per LoB (see ADR-ENT-002) |
 | BO-PRD | Product definition | internal | no | SYS-NOVA (motor, from PL-1), SYS-BEST (others) |
-| BO-PRT | Partner / customer | confidential | yes | SYS-PRT |
+| BO-PRT | Partner / customer (new attribute "broker of record", ADR-ENT-004) | confidential | yes | SYS-PRT |
 | BO-PRM | Premium / billing instruction | confidential | yes | policy system of the LoB |
 | BO-QTE | Quote | confidential | yes | SYS-NOVA |
 | BO-CLM | Claim | strictly confidential (may contain health data) | yes | SYS-CLM |
@@ -94,7 +103,8 @@ Enterprise architecture: Architecture Board, chaired by the chief architect.
 |---|---|---|
 | STD-API-01 | Synchronous APIs described in OpenAPI 3.1, exposed via EIP gateway | exposes or consumes APIs |
 | STD-EVT-01 | Events described in AsyncAPI, CloudEvents envelope | publishes or consumes events |
-| STD-IAM-01 | Authentication via Aurora IAM (OIDC) | has users |
+| STD-IAM-01 | Authentication via Aurora IAM (OIDC) | has internal users |
+| STD-IAM-02 | Customer authentication via Aurora CIAM (OIDC, multi-factor for bind) (new, ADR-ENT-005) | has external customer users |
 | STD-LOG-01 | Security-relevant logs to SIEM within 15 minutes | any production system |
 | STD-DAT-01 | PII stored and processed in Switzerland | PII = yes |
 | STD-OUT-01 | FINMA outsourcing assessment and contract clauses | hosting = vendor SaaS or vendor-hosted |
@@ -114,3 +124,18 @@ Enterprise architecture: Architecture Board, chaired by the chief architect.
 | WP-3 | Motor migration | PL-1 | SB-001 |
 | WP-4 | Household and liability migration | PL-2 | SB-002 (planned, reuses SB-001) |
 | WP-5 | Decommissioning and archive | PL-3 | SB-003 (planned) |
+
+## Plateaus and work packages (programme view "Customer Self-Service", added 2026-11)
+The plateaus depend on the core replacement: policy view needs SYS-PAD (PL-1), online bind per
+line of business needs that line on NovaPolicy.
+
+| ID | Plateau | Target date | Content | Depends on |
+|---|---|---|---|---|
+| PL-C1 | Portal live | Q2 2028 | customers see all non-life policies; motor quote and bind online for customers without a broker | PL-1 |
+| PL-C2 | Full online sales | Q2 2029 | household and liability quote and bind online | PL-2 |
+
+| ID | Work package | Delivers | Solution Blueprint |
+|---|---|---|---|
+| WP-6 | Customer portal and customer identity | PL-C1 | SB-005 |
+| WP-7 | Policy query API and read store in SYS-PAD | PL-C1 | SB-005 |
+| WP-8 | Online bind for household and liability | PL-C2 | SB-006 (planned) |

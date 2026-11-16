@@ -7,11 +7,11 @@ parent_adoit_id: DOM-PP
 domain: DOM-PP
 digital_product: DP-PANL
 status: approved
-version: 1.4
+version: 1.5
 accountable: "A. Meier (DP Manager Business) / T. Brunner (DP Manager IT)"
 responsible: "lead engineer PANL"
 reviewer: "L. Weber, solution architect DP-PANL"
-last_reviewed: 2026-11-02
+last_reviewed: 2026-11-16
 ---
 
 # DP Blueprint – Policy Administration Non-Life
@@ -150,7 +150,9 @@ flowchart LR
   PL1["PL-1 Q4 2027<br/>+ SYS-NOVA, + SYS-PAD<br/>+ SYS-MIG (temporary)"]:::app
   PL2["PL-2 Q4 2028<br/>SYS-MIG retired<br/>BEST-NL read-only"]:::app
   PL3["PL-3 Q2 2029<br/>- SYS-BEST<br/>archive in SYS-ARC"]:::app
+  PLC1["PL-C1 Q2 2028<br/>SYS-PAD: + read store,<br/>+ query API IF-12 (new)"]:::new
   PL0 --> PL1 --> PL2 --> PL3
+  PL1 -.->|prerequisite| PLC1
   classDef app fill:#b5ffff,stroke:#2a7f8f,color:#000
   classDef biz fill:#ffffb5,stroke:#a89a2b,color:#000
   classDef tech fill:#c9e7b7,stroke:#4b7f3a,color:#000
@@ -169,3 +171,4 @@ flowchart LR
 | PL-1 | Q4 2027 | motor on NovaPolicy | + SYS-NOVA, + SYS-PAD, + SYS-MIG (temporary) |
 | PL-2 | Q4 2028 | household and liability | SYS-MIG retired, BEST-NL read-only |
 | PL-3 | Q2 2029 | target | − SYS-BEST, archive in SYS-ARC |
+| PL-C1 | Q2 2028 | customer portal (programme Customer Self-Service, SB-005) | SYS-PAD gains read store and query API IF-12 |

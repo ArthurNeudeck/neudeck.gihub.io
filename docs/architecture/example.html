@@ -16,7 +16,7 @@
     <link rel="stylesheet" type="text/css" href="../assets/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="../assets/css/font-awesome.css">
     <link rel="stylesheet" href="../assets/css/templatemo-lava.css">
-    <link rel="stylesheet" href="assets/architecture.css?v=17">
+    <link rel="stylesheet" href="assets/architecture.css?v=18">
 </head>
 
 <body>
@@ -104,8 +104,10 @@
         <span>SB-001, plateau 1: motor migration with an open return checklist.</span></a>
     <a class="ab-card" href="viewer.html?doc=example/07-solution-blueprint-novapolicy-siem-logging.md"><strong>07 Solution Blueprint (light)</strong>
         <span>SB-004: a complete deviation on one page, already returned.</span></a>
+    <a class="ab-card" href="viewer.html?doc=example/08-solution-blueprint-customer-portal.md"><strong>08 Enhancement: customer portal</strong>
+        <span>SB-005: how a new demand extends the target pictures on every level.</span></a>
     <a class="ab-card" href="viewer.html?doc=example/adr/ADR-ENT-001.md"><strong>Decisions (ADRs)</strong>
-        <span>Nine ADRs: decisions, two exceptions and a waiver, on every level.</span></a>
+        <span>Thirteen ADRs: decisions, two exceptions and a waiver, on every level.</span></a>
 </div>
 
 <h2 id="scenario">The scenario</h2>
@@ -174,6 +176,7 @@ flowchart LR
     <tr><td><a href="viewer.html?doc=example/05-system-blueprint-policy-adapter-layer.md">05 System Blueprint Policy Adapter Layer</a></td><td>system, Make</td><td>components and runtime (ch. 5, 6), technical debt (ch. 11)</td></tr>
     <tr><td><a href="viewer.html?doc=example/06-solution-blueprint-p1-motor-migration.md">06 Solution Blueprint SB-001</a></td><td>solution, full</td><td>delta description, temporary migration factory, return checklist still open</td></tr>
     <tr><td><a href="viewer.html?doc=example/07-solution-blueprint-novapolicy-siem-logging.md">07 Solution Blueprint SB-004</a></td><td>solution, light</td><td>a complete deviation on one page, already returned</td></tr>
+    <tr><td><a href="viewer.html?doc=example/08-solution-blueprint-customer-portal.md">08 Solution Blueprint SB-005</a></td><td>solution, full</td><td>the enhancement: customer portal, decisions owned at their levels, return still open</td></tr>
     </tbody>
 </table>
 
@@ -234,6 +237,74 @@ flowchart LR
     <li>SB-002 for PL-2 will reuse SB-001; at that point "LoB migration" becomes an established domain pattern.</li>
 </ol>
 
+<h2 id="enhancement">Enhancement: a customer portal</h2>
+<p>In November 2026, a new demand arrives: private customers want to see their policies online and buy
+    simple products without an intermediary. This section shows how the existing target pictures are
+    extended, following the <a href="method.html#enhance">enhancement steps of the method</a>.</p>
+
+<h3 id="enh-triage" data-toc="Triage and strategy">1 Triage: the demand has no strategic goal</h3>
+<p>The triage finds a change across three domains (customer &amp; distribution, product &amp; policy,
+    technology platforms), personal data exposed to the internet, and a dependency on the core replacement.
+    It also finds that none of the goals SG-1 to SG-4 covers a direct customer channel, and that online
+    sales would compete with Aurora's brokers. The demand is escalated to the enterprise level.</p>
+
+<h3 id="enh-decisions" data-toc="Decisions at their levels">2 Decisions, each at its own level</h3>
+<table>
+    <thead><tr><th>Decision</th><th>Level and owner</th><th>Why there</th></tr></thead>
+    <tbody>
+    <tr><td><a href="viewer.html?doc=example/adr/ADR-ENT-004.md">ADR-ENT-004</a> direct channel with broker-of-record protection, new goal SG-5</td><td>Enterprise: executive board and Architecture Board</td><td>strategy and channel policy affect the whole company</td></tr>
+    <tr><td><a href="viewer.html?doc=example/adr/ADR-ENT-005.md">ADR-ENT-005</a> customer identity as a platform (CIAM), new standard STD-IAM-02</td><td>Enterprise: Architecture Board, CISO as owner of the IAM standards</td><td>creates a standard for every future customer application</td></tr>
+    <tr><td><a href="viewer.html?doc=example/adr/ADR-DOM-002.md">ADR-DOM-002</a> policy query API on SYS-PAD with a read store</td><td>Domain Product &amp; Policy</td><td>the domain keeps its promise that consumers never see the policy systems (DPP-02)</td></tr>
+    <tr><td><a href="viewer.html?doc=example/adr/ADR-SOL-005-01.md">ADR-SOL-005-01</a> portal as own development</td><td>DP Customer Self-Service, via SB-005</td><td>EP-01 requires an ADR for every "make"; moves to the new DP Blueprint on return</td></tr>
+    </tbody>
+</table>
+
+<h3 id="enh-now" data-toc="What changed now">3 What changed in the living blueprints right away</h3>
+<ul>
+    <li><a href="viewer.html?doc=example/01-enterprise-blueprint-aurora.md">Enterprise Blueprint</a> version
+        3.3: goal SG-5 (ch. 1.1), heatmap with CAP-07 now amber (ch. 1.2), direct channel in the strategy
+        (ch. 4.1), DP-CSP in the domain map (ch. 5), ADR-ENT-004 and ADR-ENT-005 (ch. 9), risk R-ENT-02
+        (ch. 11), plateaus PL-C1 and PL-C2 in the roadmap (ch. 13).</li>
+    <li><a href="viewer.html?doc=example/02-domain-blueprint-product-policy.md">Domain Blueprint Product &amp;
+        Policy</a> version 2.1: new consumer in the context (ch. 3), ADR-DOM-002 (ch. 9), PL-C1 in the roadmap
+        (ch. 13).</li>
+    <li><a href="viewer.html?doc=example/03-dp-blueprint-policy-admin-nonlife.md">DP Blueprint Policy
+        Administration Non-Life</a> version 1.5: PL-C1 in the roadmap (ch. 13).</li>
+    <li><a href="viewer.html?doc=example/00-adoit-model-extract.md">Model</a>: SG-5, DP-CSP, SYS-CSP,
+        SYS-CIAM, IF-12 to IF-16 with lifecycle <em>planned</em>, STD-IAM-02, the programme view
+        "Customer Self-Service" with its plateaus and dependencies.</li>
+</ul>
+
+<h3 id="enh-later" data-toc="What changes on return">4 What changes on return</h3>
+<p><a href="viewer.html?doc=example/08-solution-blueprint-customer-portal.md">SB-005</a> describes the delta
+    for plateau PL-C1. Its return checklist lists what follows after implementation: a new DP Blueprint
+    Customer Self-Service and System Blueprint Customer Portal, the Policy Adapter Layer's System Blueprint
+    with read store and query API, the DP context of Policy Administration Non-Life, and the lifecycle of
+    the new model objects from <em>planned</em> to <em>target</em>.</p>
+<div class="mermaid">
+flowchart LR
+  subgraph CORE["Programme Core Replacement Non-Life"]
+    PL1["PL-1 Q4 2027<br/>motor on NovaPolicy"]:::app
+    PL2["PL-2 Q4 2028<br/>all non-life on NovaPolicy"]:::app
+    PL3["PL-3 Q2 2029<br/>BEST-NL decommissioned"]:::app
+  end
+  subgraph CS["Programme Customer Self-Service"]
+    PLC1["PL-C1 Q2 2028<br/>portal live, motor online"]:::new
+    PLC2["PL-C2 Q2 2029<br/>household and liability online"]:::new
+  end
+  PL1 --> PL2 --> PL3
+  PLC1 --> PLC2
+  PL1 -.->|"prerequisite"| PLC1
+  PL2 -.->|"prerequisite"| PLC2
+  classDef app fill:#b5ffff,stroke:#2a7f8f,color:#000
+  classDef new fill:#b5ffff,stroke:#1d6fa5,stroke-width:3px,color:#000
+</div>
+
+<h3 id="enh-findings" data-toc="What it taught">5 What the enhancement taught about the method</h3>
+<p>Two new findings: the triage does not yet ask for strategic fit (F12), and plateaus of different
+    programmes depend on each other without the method saying how to model that (F13). Both are in the
+    <a href="viewer.html?doc=example/FINDINGS.md">findings</a> with proposals.</p>
+
 <h2 id="reading">Reading paths by role</h2>
 <table>
     <thead><tr><th>Role</th><th>Read</th></tr></thead>
@@ -276,10 +347,10 @@ flowchart LR
 <script src="../assets/js/custom.js"></script>
 <!-- Architecture pages -->
 <script src="https://cdn.jsdelivr.net/npm/mermaid@10.9.1/dist/mermaid.min.js"></script>
-<script src="assets/docs.js?v=17"></script>
-<script src="assets/glossary.js?v=17"></script>
-<script src="assets/ids.js?v=17"></script>
-<script src="assets/architecture.js?v=17"></script>
+<script src="assets/docs.js?v=18"></script>
+<script src="assets/glossary.js?v=18"></script>
+<script src="assets/ids.js?v=18"></script>
+<script src="assets/architecture.js?v=18"></script>
 
 </body>
 </html>

@@ -6,11 +6,11 @@ adoit_id: DOM-PP
 parent_adoit_id: ENT-AUR
 domain: DOM-PP
 status: approved
-version: 2.0
+version: 2.1
 accountable: "Head of Product & Policy (business) / Head of IT Product & Policy"
 responsible: "N. Fischer, domain architect"
 reviewer: "U. Roth, domain architect DOM-CD/DOM-TP"
-last_reviewed: 2026-10-15
+last_reviewed: 2026-11-16
 ---
 
 # Domain Blueprint – Product & Policy
@@ -76,6 +76,7 @@ flowchart LR
   FC["DOM-FC Finance & Collections"]:::ext
   TP["DOM-TP Technology Platforms<br/>EIP, IAM, SIEM, archive"]:::tech
   CD -->|"quotes, partner data"| PP
+  CD -->|"policy queries from the customer portal (new, IF-12)"| PP
   PP -->|"policy data (legacy feed)"| CL
   PP -->|"billing instructions (legacy feed)"| FC
   PP -->|"canonical policy events"| TP
@@ -181,6 +182,7 @@ BO-POL Policy (confidential, PII), BO-PRD Product definition (internal), BO-QTE 
 | ADR | Title | Type | Status | Date |
 |---|---|---|---|---|
 | ADR-DOM-001 | Canonical policy event format `policy.nonlife.v1` aligned to ACORD | decision | accepted | 2026-05-20 |
+| ADR-DOM-002 | Policy query API on the Policy Adapter Layer, served from a canonical read store | decision | accepted | 2026-11-16 |
 
 ## 11 Risks, technical debt, exceptions
 | ID | Type | Description | Owner | Expiry / target date | Ticket |
@@ -200,7 +202,9 @@ flowchart LR
   PL1["PL-1 Q4 2027<br/>motor on NovaPolicy<br/>consumers DP-CLH, DP-COL, DP-BRK fed via SYS-PAD"]:::app
   PL2["PL-2 Q4 2028<br/>household and liability on NovaPolicy"]:::app
   PL3["PL-3 Q2 2029<br/>BEST-NL decommissioned"]:::app
+  PLC1["PL-C1 Q2 2028<br/>policy query API on SYS-PAD<br/>for the customer portal (new)"]:::new
   PL1 --> PL2 --> PL3
+  PL1 -.->|prerequisite| PLC1
   classDef app fill:#b5ffff,stroke:#2a7f8f,color:#000
   classDef biz fill:#ffffb5,stroke:#a89a2b,color:#000
   classDef tech fill:#c9e7b7,stroke:#4b7f3a,color:#000
@@ -218,3 +222,4 @@ flowchart LR
 | PL-1 | Q4 2027 | motor on NovaPolicy | DP-PANL (consumers: DP-CLH, DP-COL, DP-BRK) |
 | PL-2 | Q4 2028 | household and liability on NovaPolicy | DP-PANL |
 | PL-3 | Q2 2029 | BEST-NL decommissioned | DP-PANL |
+| PL-C1 | Q2 2028 | policy query API and read store on SYS-PAD (ADR-DOM-002, SB-005) | DP-PANL (consumer DP-CSP) |
